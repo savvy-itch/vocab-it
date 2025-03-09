@@ -28,7 +28,7 @@ const useRefreshToken = () => {
       return data.accessToken;
     } catch (error) {
       console.error(error);
-      
+      setAccessToken('');
     }
   }
   return refresh;

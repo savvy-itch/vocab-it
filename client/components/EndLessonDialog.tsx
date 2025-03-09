@@ -17,7 +17,7 @@ export default function EndLessonDialog() {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="w-16 text-sm mobile:text-base mobile:w-28 flex items-center justify-center rounded-lg py-2 font-semibold text-white bg-secondaryBg-light hover:bg-hoverSecondaryBg transition-colors">
+      <AlertDialogTrigger className="w-16 text-sm mobile:text-base mobile:w-28 flex items-center justify-center rounded-lg py-2 font-semibold text-white bg-secondary-bg-light hover:bg-hover-secondary-bg transition-colors">
         End Lesson
       </AlertDialogTrigger>
       <AlertDialogContent className="flex flex-col items-center justify-center">
@@ -27,12 +27,12 @@ export default function EndLessonDialog() {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel 
-            className="font-semibold bg-secondaryBg-light dark:bg-secondaryBg-light hover:bg-hoverSecondaryBg dark:hover:bg-hoverSecondaryBg text-white hover:text-white dark:border-white"
+            className="font-semibold bg-secondary-bg-light dark:bg-secondary-bg-light hover:bg-hover-secondary-bg dark:hover:bg-hover-secondary-bg text-white hover:text-white dark:border-white"
           >
             Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            className="font-semibold bg-btnBg dark:bg-btnBg hover:bg-hoverBtnBg dark:hover:bg-hoverBtnBg text-white dark:text-white hover:text-white border dark:border-white"
+            className="font-semibold bg-btn-bg dark:bg-btn-bg hover:bg-hover-btn-bg dark:hover:bg-hover-btn-bg text-white dark:text-white hover:text-white border dark:border-white"
             onClick={() => router.push('/profile')}
           >
             OK

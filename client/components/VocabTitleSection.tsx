@@ -86,7 +86,7 @@ export default function VocabTitleSection({ id, vocabTitle, checkSingleEdit }: {
       >
         <div className="flex justify-between items-center gap-2">
           <input 
-            className="text-2xl pl-2 leading-10 border border-slate-600 rounded" type="text" 
+            className="text-2xl pl-2 leading-10 border border-slate-600 rounded-sm" type="text" 
             size={10}
             maxLength={15}
             value={title}
@@ -107,7 +107,7 @@ export default function VocabTitleSection({ id, vocabTitle, checkSingleEdit }: {
 
   return (
     <div className="justify-self-center flex gap-2">
-      <h1 className="text-2xl mobile:text-3xl md:text-4xl font-semibold dark:text-customText-dark">
+      <h1 className="text-2xl mobile:text-3xl md:text-4xl font-semibold dark:text-custom-text-dark">
         {title !== null ? title : "Loading..."}
       </h1>
       {title !== null && <button aria-label="edit" onClick={enterEditTitleMode}><HiPencilSquare /></button>}

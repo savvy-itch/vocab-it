@@ -7,8 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Vocabulary from "../models/Vocabulary.js";
-import User from "../models/User.js";
+import Vocabulary from "../models/Vocabulary";
+import User from "../models/User";
 function getVocabs(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -46,7 +46,7 @@ function addVocab(req, res) {
             foundUser.vocabularies = updatedVocabs;
             yield foundUser.save();
             yield foundUser.populate('vocabularies');
-            res.status(201).json({
+            return res.status(201).json({
                 vocabularies: foundUser.vocabularies
             });
         }
@@ -63,8 +63,8 @@ function getVocab(req, res) {
             if (!foundVocab) {
                 return res.status(400).json({ msg: 'Vocabulary not found' });
             }
-            const { _id, title, words } = foundVocab;
-            res.status(200).json({ _id, title, words });
+            const { _id, title, words, lang } = foundVocab;
+            return res.status(200).json({ _id, title, words, lang });
         }
         catch (error) {
             console.error(error);
@@ -87,7 +87,28 @@ function updateTitle(req, res) {
             if (!vocabToUpdate) {
                 return res.status(409).json({ msg: 'Invalid vocab ID' });
             }
-            res.sendStatus(204);
+            return res.sendStatus(204);
+        }
+        catch (error) {
+            console.error(error);
+            res.status(500).json({ msg: error.message });
+        }
+    });
+}
+const validLangCodes = ['FRA', 'GER', 'SPA', 'default'];
+function updateLang(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const { vocabId, updatedLang } = req.body;
+            if (!validLangCodes.includes(updatedLang)) {
+                return res.status(400).json({ msg: 'Invalid title property' });
+            }
+            const vocabToUpdate = yield Vocabulary.findByIdAndUpdate(vocabId, { lang: updatedLang }, { new: true });
+            if (!vocabToUpdate) {
+                return res.status(409).json({ msg: 'Invalid vocab ID' });
+            }
+            const { _id, title, words, lang } = vocabToUpdate;
+            return res.status(200).json({ _id, title, words, lang });
         }
         catch (error) {
             console.error(error);
@@ -112,4 +133,4 @@ function deleteVocab(req, res) {
         }
     });
 }
-export { getVocabs, addVocab, getVocab, updateTitle, deleteVocab };
+export { getVocabs, addVocab, getVocab, updateTitle, updateLang, deleteVocab };

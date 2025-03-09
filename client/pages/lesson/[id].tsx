@@ -229,7 +229,7 @@ const Lesson: NextPageWithLayout = () => {
           value={Math.round(((currWord - 1) / lessonVolume) * 100)}
           aria-label="progress bar"
         />
-        <section className="w-full p-4 sm:p-8 rounded-xl bg-white text-customText-light dark:text-customText-dark dark:bg-customHighlight border border-zinc-400 dark:border-zinc-300 shadow-2xl">
+        <section className="w-full p-4 sm:p-8 rounded-xl bg-white text-custom-text-light dark:text-custom-text-dark dark:bg-custom-highlight border border-zinc-400 dark:border-zinc-300 shadow-2xl">
           <div>
             <h2 className="text-xl mobile:text-2xl">Word:</h2>
             {(isTokenChecked && !isLoading && words[currWord - 1]) ? (
@@ -242,20 +242,20 @@ const Lesson: NextPageWithLayout = () => {
               </div>
             )}
           </div>
-          <div className="h-px my-5 w-full bg-zinc-400 dark:bg-mainBg-dark" />
+          <div className="h-px my-5 w-full bg-zinc-400 dark:bg-main-bg-dark" />
           <div>
             <div className="flex justify-between">
               <h2 className="text-xl mobile:text-2xl">Enter translation:</h2>
               {(isTokenChecked && !isLoading && words[currWord - 1]) ? (
                 <HintButton word={words[currWord - 1].word} />
               ) : (
-                <Skeleton className="w-[38px] h-[38px] rounded" />
+                <Skeleton className="w-[38px] h-[38px] rounded-sm" />
               )}
             </div>
             <form className="my-3 flex justify-center" onSubmit={submitAnswer}>
               <input
                 ref={inputRef}
-                className="text-2xl leading-10 text-center rounded border border-zinc-400 w-full mobile:w-auto"
+                className="text-2xl leading-10 text-center rounded-sm border border-zinc-400 w-full mobile:w-auto"
                 type="text"
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}
@@ -277,7 +277,7 @@ const Lesson: NextPageWithLayout = () => {
             Skip
           </button>
           <button
-            className="w-16 text-sm mobile:text-base mobile:w-28 flex justify-center items-center rounded-lg py-2 font-semibold text-white bg-btnBg hover:bg-hoverBtnBg focus:bg-hoverBtnBg transition-colors disabled:text-gray-400"
+            className="w-16 text-sm mobile:text-base mobile:w-28 flex justify-center items-center rounded-lg py-2 font-semibold text-white bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg transition-colors disabled:text-gray-400"
             onClick={registerAnswer}
             disabled={!isTokenChecked || isLoading}
           >
@@ -288,7 +288,7 @@ const Lesson: NextPageWithLayout = () => {
           <section className="flex justify-center gap-2 flex-wrap mt-3">
             {currVocab?.lang !== 'default' && (
               <button
-                className="px-3 py-2 bg-gray-300 text-customText-light rounded-md shadow-md font-mono text-xl font-semibold transition-all duration-100 ease-in-out hover:bg-gray-400"
+                className="px-3 py-2 bg-gray-300 text-custom-text-light rounded-md shadow-md font-mono text-xl font-semibold transition-all duration-100 ease-in-out hover:bg-gray-400"
                 onClick={() => setIsUpperCase(!isUpperCase)}
                 type="button"
               >
@@ -298,7 +298,7 @@ const Lesson: NextPageWithLayout = () => {
             {currVocab?.lang && currVocab.lang !== 'default' && specialSymbols[currVocab?.lang].map(k => {
               return <button
                 key={k}
-                className="px-3 py-2 bg-gray-300 text-customText-light rounded-md shadow-md font-mono text-xl font-semibold transition-all duration-100 ease-in-out hover:bg-gray-400"
+                className="px-3 py-2 bg-gray-300 text-custom-text-light rounded-md shadow-md font-mono text-xl font-semibold transition-all duration-100 ease-in-out hover:bg-gray-400"
                 type="button"
                 onClick={() => handleSpecialKeyClick(k)}
               >

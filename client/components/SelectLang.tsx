@@ -66,15 +66,15 @@ export default function SelectLang() {
         disabled={isUpdating}
         name="langs"
       >
-        <SelectTrigger className="w-3/4 mobile:w-[180px] bg-white dark:border-customHighlight dark:bg-mainBg-dark border border-slate-200">
+        <SelectTrigger className="w-3/4 mobile:w-[180px] bg-white dark:border-custom-highlight dark:bg-main-bg-dark border border-slate-200">
           <SelectValue placeholder="Select a language" />
         </SelectTrigger>
-        <SelectContent className="dark:border-customHighlight dark:bg-mainBg-dark">
+        <SelectContent className="dark:border-custom-highlight dark:bg-main-bg-dark">
           <SelectGroup>
             <SelectLabel>Languages</SelectLabel>
-            <SelectItem className="text-customText-light dark:text-white hover:bg-slate-300 dark:hover:bg-customHighlight focus:bg-slate-200 focus:text-slate-900 dark:focus:bg-customHighlight" value="default">No language</SelectItem>
+            <SelectItem className="text-custom-text-light dark:text-white hover:bg-slate-300 dark:hover:bg-custom-highlight focus:bg-slate-200 focus:text-slate-900 dark:focus:bg-custom-highlight" value="default">No language</SelectItem>
             {Object.keys(specialSymbols).map(lang => {
-              return <SelectItem className="text-customText-light dark:text-white hover:bg-slate-300 dark:hover:bg-customHighlight focus:bg-slate-200 focus:text-slate-900 dark:focus:bg-customHighlight" value={lang} key={lang}>{lang}</SelectItem>
+              return <SelectItem className="text-custom-text-light dark:text-white hover:bg-slate-300 dark:hover:bg-custom-highlight focus:bg-slate-200 focus:text-slate-900 dark:focus:bg-custom-highlight" value={lang} key={lang}>{lang}</SelectItem>
             })}
           </SelectGroup>
         </SelectContent>

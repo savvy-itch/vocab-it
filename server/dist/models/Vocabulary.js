@@ -33,6 +33,10 @@ const vocabSchema = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    lang: {
+        type: String,
+        default: 'default'
     }
 });
 export default mongoose.model('Vocabulary', vocabSchema);

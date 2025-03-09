@@ -95,7 +95,7 @@ export default function ProfileAddVocabSection({checkSingleEdit}: {checkSingleEd
 
   return (
     <article>
-      <h2 className='text-xl mobile:text-2xl md:text-3xl font-bold dark:text-customText-dark mb-4'>Vocabularies</h2>
+      <h2 className='text-xl mobile:text-2xl md:text-3xl font-bold dark:text-custom-text-dark mb-4'>Vocabularies</h2>
       <VocabList />
       {isAddVocab ? (
         <>
@@ -104,7 +104,7 @@ export default function ProfileAddVocabSection({checkSingleEdit}: {checkSingleEd
             onSubmit={createVocab}
           >
             <input 
-              className="text-lg leading-9 px-2 rounded border border-zinc-400 dark:border-zinc-300 max-w-[150px]" 
+              className="text-lg leading-9 px-2 rounded-sm border border-zinc-400 dark:border-zinc-300 max-w-[150px]" 
               value={newVocab} 
               onChange={(e) => setNewVocab(e.target.value)}
               onKeyDown={checkForAbort}
@@ -114,33 +114,33 @@ export default function ProfileAddVocabSection({checkSingleEdit}: {checkSingleEd
               data-testid="vocab-input"
             />
             <button 
-              className="rounded-full bg-white mobile:bg-btnBg mobile:hover:bg-hoverBtnBg mobile:focus:bg-hoverBtnBg mobile:text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded"
+              className="rounded-full bg-white mobile:bg-btn-bg mobile:hover:bg-hover-btn-bg mobile:focus:bg-hover-btn-bg mobile:text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm"
               aria-label="create" 
               onClick={createVocab}
             >              
               <p className="hidden mobile:inline">Create</p>
-              <HiCheckCircle className="inline mobile:hidden text-btnBg hover:text-hoverBtnBg focus:text-hoverBtnBg h-9 w-9" /> 
+              <HiCheckCircle className="inline mobile:hidden text-btn-bg hover:text-hover-btn-bg focus:text-hover-btn-bg h-9 w-9" /> 
             </button>
             <button 
-              className={`rounded-full bg-white mobile:bg-secondaryBg-light mobile:hover:bg-secondaryBg-light/80 mobile:focus:bg-secondaryBg-light/80 mobile:text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded`}
+              className={`rounded-full bg-white mobile:bg-secondary-bg-light mobile:hover:bg-secondary-bg-light/80 mobile:focus:bg-secondary-bg-light/80 mobile:text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm`}
               aria-label="cancel" 
               onClick={cancelAddVocab}
             >
               <p className="hidden mobile:inline">Cancel</p>
-              <HiMiniXCircle className="inline mobile:hidden text-secondaryBg-light hover:text-secondaryBg-light/80 focus:text-secondaryBg-light/80 h-9 w-9" />
+              <HiMiniXCircle className="inline mobile:hidden text-secondary-bg-light hover:text-secondary-bg-light/80 focus:text-secondary-bg-light/80 h-9 w-9" />
             </button>
           </form>
           <p className="text-sm text-red-800 min-h-4">{errorMsg}</p>
         </>
         ) : (
         <button 
-          className="flex gap-1 items-center justify-center mobile:justify-start w-full mobile:w-fit rounded-lg py-2 px-3 font-semibold text-white bg-btnBg hover:bg-hoverBtnBg focus:bg-hoverBtnBg transition-colors"
+          className="flex gap-1 items-center justify-center mobile:justify-start w-full mobile:w-fit rounded-lg py-2 px-3 font-semibold text-white bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg transition-colors"
           onClick={enterAddVocabMode}
         >
           <HiPlus /> Add Vocabulary
         </button>
       )}
-      <div className="h-px w-full dark:bg-mainBg-dark mt-3 mb-5" />
+      <div className="h-px w-full dark:bg-main-bg-dark mt-3 mb-5" />
     </article>
   )
 }

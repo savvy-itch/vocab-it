@@ -63,10 +63,10 @@ export default function DangerZone() {
 
   return (
     <section>
-      <h2 className='text-xl mobile:text-2xl md:text-3xl font-bold dark:text-customText-dark mb-4'>Danger zone</h2>
+      <h2 className='text-xl mobile:text-2xl md:text-3xl font-bold dark:text-custom-text-dark mb-4'>Danger zone</h2>
 
       <AlertDialog>
-        <AlertDialogTrigger className="rounded-full bg-white mobile:bg-secondaryBg-light mobile:hover:bg-secondaryBg-light/80 mobile:text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded" aria-label="delete account">
+        <AlertDialogTrigger className="rounded-full bg-white mobile:bg-secondary-bg-light mobile:hover:bg-secondary-bg-light/80 mobile:text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm" aria-label="delete account">
           <p className="hidden mobile:inline">Delete your account</p>
         </AlertDialogTrigger>
         <AlertDialogContent>

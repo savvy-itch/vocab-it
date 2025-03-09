@@ -148,7 +148,7 @@ export default function FileForm() {
       <p className="text-lg mt-1">Import a <span className="font-mono font-semibold">.txt/.csv</span> file</p>
       <p className="mb-3">(in the form &#34;word,translation&#34;)</p>
       <Label
-        className="w-full mobile:w-2/3 text-center text-base text-white p-2 rounded bg-zinc-700 hover:bg-zinc-800 hover:cursor-pointer transition-colors" 
+        className="w-full mobile:w-2/3 text-center text-base text-white p-2 rounded-sm bg-zinc-700 hover:bg-zinc-800 hover:cursor-pointer transition-colors" 
         htmlFor="words-file"
       >
         Choose file
@@ -164,7 +164,7 @@ export default function FileForm() {
       />
       <p className="my-3 italic flex justify-center items-center gap-1 w-80 max-w-[90%] overflow-hidden">{isSelectFile && <HiDocumentText />} {filePreview}</p>
       <button 
-        className="w-full mobile:w-auto text-center text-base text-white font-semibold py-2 px-5 rounded bg-zinc-700 hover:bg-zinc-800 hover:cursor-pointer disabled:cursor-default disabled:bg-zinc-600 disabled:text-zinc-300 transition-colors"
+        className="w-full mobile:w-auto text-center text-base text-white font-semibold py-2 px-5 rounded-sm bg-zinc-700 hover:bg-zinc-800 hover:cursor-pointer disabled:cursor-default disabled:bg-zinc-600 disabled:text-zinc-300 transition-colors"
         type="submit" 
         onSubmit={displayFileInfo}
         disabled={!isSelectFile}

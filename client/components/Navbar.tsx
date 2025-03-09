@@ -102,7 +102,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-secondaryBg-light dark:bg-secondaryBg-dark py-2 sm:py-5 absolute top-0 left-0 right-0 transition-colors">
+    <nav className="bg-secondary-bg-light dark:bg-secondary-bg-dark py-2 sm:py-5 absolute top-0 left-0 right-0 transition-colors">
       <div className="w-11/12 mobile:w-4/5 mx-auto flex justify-between items-center">
         <Link href={'/'} className="flex items-center" title="Vocab-It - a language learning app">
           <Image
@@ -127,23 +127,23 @@ export default function Navbar() {
                     >
                       <HiGlobeAlt className="w-8 h-8 text-white" />
                     </MenubarTrigger>
-                    <MenubarContent className="dark:border-customHighlight dark:bg-mainBg-dark" align='end'>
+                    <MenubarContent className="dark:border-custom-highlight dark:bg-main-bg-dark" align='end'>
                       {isFetching ? (
-                        <MenubarItem className="hover:cursor-pointer text-customText-light dark:text-white dark:hover:bg-customHighlight" aria-label="menuitem">
+                        <MenubarItem className="hover:cursor-pointer text-custom-text-light dark:text-white dark:hover:bg-custom-highlight" aria-label="menuitem">
                           <HiFolder className="mr-2" /> LOADING...
                         </MenubarItem>
                       ) : (
                         vocabs?.map((v: Vocab) => {
                           return (
-                            <MenubarItem aria-label="menuitem" key={v._id} className="hover:cursor-pointer text-customText-light dark:text-white dark:hover:bg-customHighlight">
+                            <MenubarItem aria-label="menuitem" key={v._id} className="hover:cursor-pointer text-custom-text-light dark:text-white dark:hover:bg-custom-highlight">
                               <Link href={`/vocabularies/${encodeURIComponent(v._id)}`} className="flex items-center w-full">
                                 <HiFolder className="mr-2" /> {v.title}
                               </Link>
                             </MenubarItem>)
                         })
                       )}
-                      <MenubarSeparator className="dark:bg-customHighlight" />
-                      <MenubarItem aria-label="menuitem" className="hover:cursor-pointer text-customText-light dark:text-white dark:hover:bg-customHighlight">
+                      <MenubarSeparator className="dark:bg-custom-highlight" />
+                      <MenubarItem aria-label="menuitem" className="hover:cursor-pointer text-custom-text-light dark:text-white dark:hover:bg-custom-highlight">
                         <DialogTrigger className="flex items-center"
                           onClick={resetDialogInput}
                         >
@@ -161,11 +161,11 @@ export default function Navbar() {
                       <HiUserCircle className="w-8 h-8 fill-white" />
                     </MenubarTrigger>
 
-                    <MenubarContent className="dark:border-customHighlight dark:bg-mainBg-dark" align='end'>
-                      <MenubarItem aria-label="menuitem" className="hover:cursor-pointer text-customText-light dark:text-white dark:hover:bg-customHighlight">
+                    <MenubarContent className="dark:border-custom-highlight dark:bg-main-bg-dark" align='end'>
+                      <MenubarItem aria-label="menuitem" className="hover:cursor-pointer text-custom-text-light dark:text-white dark:hover:bg-custom-highlight">
                         <Link className="w-full" href='/profile/'>Account</Link>
                       </MenubarItem>
-                      <MenubarItem aria-label="menuitem" className="hover:cursor-pointer text-customText-light dark:text-white dark:hover:bg-customHighlight">
+                      <MenubarItem aria-label="menuitem" className="hover:cursor-pointer text-custom-text-light dark:text-white dark:hover:bg-custom-highlight">
                         <button className="w-full text-left" onClick={handleSignOut}>Sign out</button>
                       </MenubarItem>
                     </MenubarContent>
@@ -195,21 +195,21 @@ export default function Navbar() {
                   <HiMoon className="w-8 h-8 fill-white absolute rotate-90 scale-0 transition-all dark:-rotate-0 dark:scale-100" />
                 </MenubarTrigger>
 
-                <MenubarContent className="dark:border-customHighlight dark:bg-mainBg-dark" align='end'>
+                <MenubarContent className="dark:border-custom-highlight dark:bg-main-bg-dark" align='end'>
                   <MenubarItem
-                    className="hover:cursor-pointer text-customText-light dark:text-white dark:hover:bg-customHighlight"
+                    className="hover:cursor-pointer text-custom-text-light dark:text-white dark:hover:bg-custom-highlight"
                     onClick={() => setTheme("light")}
                     aria-label="menuitem"
                   >
                     Light
                   </MenubarItem>
-                  <MenubarItem className="hover:cursor-pointer text-customText-light dark:text-white dark:hover:bg-customHighlight"
+                  <MenubarItem className="hover:cursor-pointer text-custom-text-light dark:text-white dark:hover:bg-custom-highlight"
                     onClick={() => setTheme("dark")}
                     aria-label="menuitem"
                   >
                     Dark
                   </MenubarItem>
-                  <MenubarItem className="hover:cursor-pointer text-customText-light dark:text-white dark:hover:bg-customHighlight"
+                  <MenubarItem className="hover:cursor-pointer text-custom-text-light dark:text-white dark:hover:bg-custom-highlight"
                     onClick={() => setTheme("system")}
                     aria-label="menuitem"
                   >

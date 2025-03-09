@@ -7,17 +7,17 @@ async function handleLogin(req: Request, res: Response) {
   try {
     const { username, pwd } = req.body;
     if (!username || !pwd) {
-      return res.status(400).json({ 'message': 'Username and password are required' });
+      return res.status(401).json({ msg: 'Username and password are required' });
     }
 
     const foundUser = await User.findOne({ username }).exec();
     if (!foundUser) {
-      return res.sendStatus(401); // Unauthorized
+      return res.status(401).json({ msg: 'User does not exist' });
     }
 
     const match = await bcrypt.compare(pwd, foundUser.password);
     if (!match) {
-      return res.status(400).json({ msg: 'Invalid password' });
+      return res.status(401).json({ msg: 'Invalid password' });
     }
 
     const refreshSecret = process.env.REFRESH_TOKEN_SECRET;
@@ -36,12 +36,12 @@ async function handleLogin(req: Request, res: Response) {
         }
       },
       accessSecret,
-      { expiresIn: '20m' }
+      { expiresIn: '10s' } // 20m
     );
     const refreshToken = jwt.sign(
       { "_id": foundUser._id },
       refreshSecret,
-      { expiresIn: '3d' }
+      { expiresIn: '20s' } // 3d
     );
     foundUser.refreshToken = refreshToken;
     await foundUser.save();

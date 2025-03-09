@@ -31,7 +31,7 @@ export default function CustomTooltip({text}: {text: string}) {
         <PopoverTrigger aria-label="tooltip for touch screens">
           <HiMiniQuestionMarkCircle />
         </PopoverTrigger>
-        <PopoverContent className="dark:border-customHighlight dark:bg-mainBg-dark max-w-[50%]">
+        <PopoverContent className="dark:border-custom-highlight dark:bg-main-bg-dark max-w-[50%]">
           <p className="font-thin text-sm italic">{text}</p>
         </PopoverContent>
       </Popover>
@@ -44,7 +44,7 @@ export default function CustomTooltip({text}: {text: string}) {
         <TooltipTrigger className="cursor-default" aria-label="tooltip">
           <HiMiniQuestionMarkCircle />
         </TooltipTrigger>
-        <TooltipContent className="dark:border-customHighlight dark:bg-mainBg-dark max-w-[50%]">
+        <TooltipContent className="dark:border-custom-highlight dark:bg-main-bg-dark max-w-[50%]">
           <p className="font-thin text-sm italic">{text}</p>
         </TooltipContent>
       </Tooltip>

@@ -155,13 +155,13 @@ export default function VocabListRow({ vocab }: { vocab: Vocab }) {
 
   return (
     <article>
-      <div className="flex items-center gap-1 py-3 px-2 rounded-md dark:border-mainBg-dark hover:bg-slate-100 dark:hover:bg-customHighlight2 transition-colors">
+      <div className="flex items-center gap-1 py-3 px-2 rounded-md dark:border-main-bg-dark hover:bg-slate-100 dark:hover:bg-custom-highlight2 transition-colors">
         {isEditTitle ? (
           <>
             <div className="w-2/5">
               <form onSubmit={updateTitle}>
                 <input
-                  className="leading-8 px-2 rounded"
+                  className="leading-8 px-2 rounded-sm"
                   type="text"
                   value={title}
                   size={10}
@@ -175,20 +175,20 @@ export default function VocabListRow({ vocab }: { vocab: Vocab }) {
             <div className="w-10 text-center">{vocab.words ? vocab.words.length : 0}</div>
             <div className="flex gap-2 justify-around grow">
               <button
-                className={`rounded-full bg-white mobile:bg-btnBg mobile:hover:bg-hoverBtnBg mobile:text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded`}
+                className={`rounded-full bg-white mobile:bg-btn-bg mobile:hover:bg-hover-btn-bg mobile:text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm`}
                 aria-label="save"
                 onClick={updateTitle}
               >
                 <p className="hidden mobile:inline">Save</p>
-                <HiCheckCircle className="inline mobile:hidden text-btnBg hover:text-hoverBtnBg h-8 w-8" />
+                <HiCheckCircle className="inline mobile:hidden text-btn-bg hover:text-hover-btn-bg h-8 w-8" />
               </button>
               <button
-                className={`rounded-full bg-white mobile:bg-secondaryBg-light mobile:hover:bg-secondaryBg-light/80 mobile:text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded`}
+                className={`rounded-full bg-white mobile:bg-secondary-bg-light mobile:hover:bg-secondary-bg-light/80 mobile:text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm`}
                 aria-label="cancel"
                 onClick={() => setIsEditTitle(false)}
               >
                 <p className="hidden mobile:inline">Cancel</p>
-                <HiMiniXCircle className="inline mobile:hidden text-secondaryBg-light hover:text-secondaryBg-light/80 h-8 w-8" />
+                <HiMiniXCircle className="inline mobile:hidden text-secondary-bg-light hover:text-secondary-bg-light/80 h-8 w-8" />
               </button>
             </div>
           </>
@@ -197,7 +197,7 @@ export default function VocabListRow({ vocab }: { vocab: Vocab }) {
             <p className="w-2/5">
               <Link
                 href={`/vocabularies/${vocab._id}`}
-                className="underline hover:text-customText-light/80 dark:hover:text-customText-dark/80 sm:text-lg"
+                className="underline hover:text-custom-text-light/80 dark:hover:text-custom-text-dark/80 sm:text-lg"
               >
                 {vocab.title}
               </Link>
@@ -206,13 +206,13 @@ export default function VocabListRow({ vocab }: { vocab: Vocab }) {
             <div className="grow flex gap-1 justify-around">
               {vocab.words.length > 0 ? (
                 <Link
-                  className="text-white text-sm sm:text-lg rounded bg-btnBg hover:bg-hoverBtnBg transition-colors py-1 px-3"
+                  className="text-white text-sm sm:text-lg rounded-sm bg-btn-bg hover:bg-hover-btn-bg transition-colors py-1 px-3"
                   href={`/lesson/${vocab._id}`}
                 >
                   Start <span className="hidden sm:inline">Lesson</span>
                 </Link>
               ) : (
-                <p className="text-sm sm:text-lg rounded bg-btnBg hover:bg-hoverBtnBg transition-colors py-1 px-3 text-gray-300">Start <span className="hidden sm:inline">Lesson</span></p>
+                <p className="text-sm sm:text-lg rounded-sm bg-btn-bg hover:bg-hover-btn-bg transition-colors py-1 px-3 text-gray-300">Start <span className="hidden sm:inline">Lesson</span></p>
               )}
               <div className="flex gap-4">
                 <button className="text-lg" aria-label="edit" onClick={enterEditTitleMode}><HiPencilSquare /></button>
@@ -239,7 +239,7 @@ export default function VocabListRow({ vocab }: { vocab: Vocab }) {
         )}
       </div>
       {/* separator */}
-      {vocabs && vocabs[vocabs.length - 1]._id !== vocab._id && <div className="h-px w-full dark:bg-mainBg-dark" />}
+      {vocabs && vocabs[vocabs.length - 1]._id !== vocab._id && <div className="h-px w-full dark:bg-main-bg-dark" />}
     </article>
   )
 }

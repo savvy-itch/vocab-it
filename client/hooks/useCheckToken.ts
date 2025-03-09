@@ -26,7 +26,7 @@ function useCheckToken() {
         console.error(error);
       }
     }
-  }, [accessToken, refresh, setIsTokenChecked]);
+  }, [accessToken, refresh]);
 
   return { checkToken };
 }

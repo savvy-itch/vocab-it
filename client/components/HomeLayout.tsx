@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: ReactNode}) {
         />
       </Head>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <div className="bg-mainBg-light dark:bg-mainBg-dark text-customText-light dark:text-customText transition-colors">
+        <div className="bg-main-bg-light dark:bg-main-bg-dark text-custom-text-light dark:text-custom-text-dark transition-colors">
           <main className={`${arialRounded.className} h-[100dvh] mx-auto overflow-hidden`}>{children}</main>
         </div>
       </ThemeProvider>

@@ -112,7 +112,7 @@ export default function VocabAddWordForm({ checkSingleEdit }: { checkSingleEdit:
             <div className="flex flex-col gap-2">
               <Label>Word</Label>
               <input
-                className="text-base sm:text-lg px-2 leading-9 border border-slate-600 rounded"
+                className="text-base sm:text-lg px-2 leading-9 border border-slate-600 rounded-sm"
                 value={newWord}
                 onChange={(e) => setNewWord(e.target.value)}
                 onKeyDown={checkForAbort}
@@ -125,7 +125,7 @@ export default function VocabAddWordForm({ checkSingleEdit }: { checkSingleEdit:
             <div className="flex flex-col gap-2">
               <Label>Translation</Label>
               <input
-                className="text-base sm:text-lg px-2 leading-9 border border-slate-600 rounded"
+                className="text-base sm:text-lg px-2 leading-9 border border-slate-600 rounded-sm"
                 value={translation}
                 onChange={(e) => setTranslation(e.target.value)}
                 onKeyDown={checkForAbort}
@@ -137,13 +137,13 @@ export default function VocabAddWordForm({ checkSingleEdit }: { checkSingleEdit:
           </div>
           <div className="flex gap-2">
             <button
-              className="text-white bg-btnBg hover:bg-hoverBtnBg focus:bg-hoverBtnBg px-3 py-2 rounded"
+              className="text-white bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg px-3 py-2 rounded-sm"
               onClick={addWord}
             >
               Create
             </button>
             <button
-              className="bg-secondaryBg-light hover:bg-hoverSecondaryBg focus:bg-hoverSecondaryBg text-white px-3 py-2 rounded"
+              className="bg-secondary-bg-light hover:bg-hover-secondary-bg focus:bg-hover-secondary-bg text-white px-3 py-2 rounded-sm"
               onClick={cancelAddWord}
             >
               Cancel
@@ -158,7 +158,7 @@ export default function VocabAddWordForm({ checkSingleEdit }: { checkSingleEdit:
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <button
-        className="flex gap-1 items-center justify-center w-full mobile:w-3/4 rounded-lg mt-5 py-2 px-3 font-semibold text-white bg-btnBg hover:bg-hoverBtnBg focus:bg-hoverBtnBg transition-colors disabled:text-gray-300 disabled:cursor-default"
+        className="flex gap-1 items-center justify-center w-full mobile:w-3/4 rounded-lg mt-5 py-2 px-3 font-semibold text-white bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg transition-colors disabled:text-gray-300 disabled:cursor-default"
         onClick={enterAddWordMode}
         disabled={!currVocab}
       >

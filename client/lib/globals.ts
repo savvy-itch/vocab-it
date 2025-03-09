@@ -1,7 +1,7 @@
 import localFont from 'next/font/local';
 
-// const BASE_URL="http://localhost:3500";
-const BASE_URL="https://api-vocab-it.koyeb.app";
+const BASE_URL="http://localhost:3500";
+// const BASE_URL="https://api-vocab-it.koyeb.app";
 const INITIAL_NUMBER: number = 3;
 const MAX_WORDS = 100;
 const SOUND_VOLUME = 0.25;

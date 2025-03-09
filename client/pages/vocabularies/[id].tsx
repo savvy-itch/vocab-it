@@ -124,10 +124,10 @@ const Vocabulary: NextPageWithLayout = () => {
       <Head>
         <title>Vocabulary | Vocab-It</title>
       </Head>
-      <section className="w-full mobile:w-11/12 lg:w-3/5 mx-auto mb-6 py-5 px-4 sm:px-8 rounded-3xl bg-white text-customText-light dark:text-customText-dark dark:bg-customHighlight flex flex-col border border-zinc-400 dark:border-zinc-300 shadow-2xl">
+      <section className="w-full mobile:w-11/12 lg:w-3/5 mx-auto mb-6 py-5 px-4 sm:px-8 rounded-3xl bg-white text-custom-text-light dark:text-custom-text-dark dark:bg-custom-highlight flex flex-col border border-zinc-400 dark:border-zinc-300 shadow-2xl">
         <div className="grid grid-rows-2 sm:grid-cols-3 gap-3 w-full items-start">
           <Link
-            className="w-fit flex gap-1 items-center rounded-full py-1 px-3 hover:bg-slate-100 dark:hover:bg-customHighlight2 focus:bg-slate-100 dark:focus:bg-customHighlight2 border border-zinc-400 dark:border-zinc-300"
+            className="w-fit flex gap-1 items-center rounded-full py-1 px-3 hover:bg-slate-100 dark:hover:bg-custom-highlight2 focus:bg-slate-100 dark:focus:bg-custom-highlight2 border border-zinc-400 dark:border-zinc-300"
             href="/profile"
           >
             <HiArrowLongLeft /> Profile
@@ -152,13 +152,13 @@ const Vocabulary: NextPageWithLayout = () => {
         <div className="my-5 flex justify-between items-center">
           {(words.length > 0 && router.query.id) ? (
             <Link
-              className="text-white rounded-lg py-2 px-3 font-semibold bg-btnBg hover:bg-hoverBtnBg focus:bg-hoverBtnBg transition-colors"
+              className="text-white rounded-lg py-2 px-3 font-semibold bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg transition-colors"
               href={`/lesson/${router.query.id}`}>
               Start Lesson
             </Link>
           ) : (
             <p
-              className="rounded-lg py-2 px-3 font-semibold bg-btnBg disabled:bg-btnBg/80 disabled:text-zinc-300 cursor-default transition-colors"
+              className="rounded-lg py-2 px-3 font-semibold bg-btn-bg disabled:bg-btn-bg/80 disabled:text-zinc-300 cursor-default transition-colors"
             >
               Start Lesson
             </p>

@@ -23,7 +23,7 @@ export default function LessonResult({allAnswers, words}: ResultProps) {
   const successPercentage: number = Math.round((answeredCorrectly / words.length) * 100);
 
   return (
-    <section className="w-full p-4 sm:p-8 rounded-xl bg-white text-customText-light dark:text-customText-dark dark:bg-customHighlight text-center shadow-2xl">
+    <section className="w-full p-4 sm:p-8 rounded-xl bg-white text-custom-text-light dark:text-custom-text-dark dark:bg-custom-highlight text-center shadow-2xl">
       <h1 className="text-3xl mobile:text-3xl">Lesson Complete</h1>
       <h2 className="text-xl mobile:text-2xl text-center my-3">You&#39;ve correctly translated</h2>
       <p className="text-2xl">

@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import User from "../models/User.js";
+import User from "../models/User";
 import jwt from 'jsonwebtoken';
 function handleRefreshToken(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -35,7 +35,7 @@ function handleRefreshToken(req, res) {
                     "username": foundUser.username,
                     "roles": roles
                 }
-            }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m' });
+            }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10s' });
             res.json({ accessToken });
         }
         catch (error) {

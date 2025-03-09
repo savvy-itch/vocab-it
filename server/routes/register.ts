@@ -1,7 +1,8 @@
 import express from 'express';
-import registerController from '../controllers/registerController';
+import handleNewUser from '../controllers/registerController';
+// import handleNewUase from '../controllers/registerController';
 const registerRouter = express.Router();
 
-registerRouter.post('/', registerController);
+registerRouter.post('/', handleNewUser);
 
 export default registerRouter;

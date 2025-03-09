@@ -21,6 +21,8 @@ export default function RequireAuth({ allowedRoles, children }: { allowedRoles: 
       if (!roles.find(role => allowedRoles?.includes(role))) {
         router.push('/auth/login');
       }
+    } else {
+      return;
     }
   }, [accessToken, isTokenChecked, allowedRoles, router]);
 

@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import User from "../models/User.js";
+import User from "../models/User";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 function handleLogin(req, res) {
@@ -15,15 +15,15 @@ function handleLogin(req, res) {
         try {
             const { username, pwd } = req.body;
             if (!username || !pwd) {
-                return res.status(400).json({ 'message': 'Username and password are required' });
+                return res.status(401).json({ msg: 'Username and password are required' });
             }
             const foundUser = yield User.findOne({ username }).exec();
             if (!foundUser) {
-                return res.sendStatus(401); // Unauthorized
+                return res.status(401).json({ msg: 'User does not exist' });
             }
             const match = yield bcrypt.compare(pwd, foundUser.password);
             if (!match) {
-                return res.status(400).json({ msg: 'Invalid password' });
+                return res.status(401).json({ msg: 'Invalid username or password' });
             }
             const refreshSecret = process.env.REFRESH_TOKEN_SECRET;
             const accessSecret = process.env.ACCESS_TOKEN_SECRET;
@@ -37,8 +37,10 @@ function handleLogin(req, res) {
                     "username": foundUser.username,
                     "roles": roles
                 }
-            }, accessSecret, { expiresIn: '10m' });
-            const refreshToken = jwt.sign({ "_id": foundUser._id }, refreshSecret, { expiresIn: '1d' });
+            }, accessSecret, { expiresIn: '10s' } // 20m
+            );
+            const refreshToken = jwt.sign({ "_id": foundUser._id }, refreshSecret, { expiresIn: '20s' } // 3d
+            );
             foundUser.refreshToken = refreshToken;
             yield foundUser.save();
             res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: "none", secure: true, maxAge: 24 * 60 * 60 * 1000 });

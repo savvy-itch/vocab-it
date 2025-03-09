@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import User from "../models/User.js";
+import User from "../models/User";
 function handleLogout(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const cookies = req.cookies;

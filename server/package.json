@@ -7,7 +7,7 @@
     "node": ">=20.11.1"
   },
   "scripts": {
-    "dev": "nodemon server.ts",
+    "dev": "nodemon",
     "build": "tsc && tsc-alias",
     "start": "node dist/server.js"
   },
@@ -15,29 +15,30 @@
   "dependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/compression": "^1.7.5",
-    "@types/cookie-parser": "^1.4.7",
+    "@types/cookie-parser": "^1.4.8",
     "@types/cors": "^2.8.17",
-    "@types/jsonwebtoken": "^9.0.6",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/uuid": "^10.0.0",
     "bcrypt": "^5.1.1",
-    "compression": "^1.7.4",
-    "cookie-parser": "^1.4.6",
+    "compression": "^1.8.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "express-mongo-sanitize": "^2.2.0",
-    "express-rate-limit": "^7.4.0",
-    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.5.1",
-    "tsc-alias": "^1.8.10",
-    "uuid": "^10.0.0"
+    "mongoose": "^8.11.0",
+    "npm-check-updates": "^17.1.15",
+    "tsc-alias": "^1.8.11",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
-    "@types/node": "^20.14.10",
-    "nodemon": "^3.1.4",
+    "@types/node": "^22.13.8",
+    "nodemon": "^3.1.9",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.3"
+    "typescript": "^5.8.2"
   }
 }

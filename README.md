@@ -22,6 +22,21 @@ Users can learn words by completing lessons in the form of flash cards.
 - add/edit/delete words;
 - import words from a file (.csv & .txt);
 
+## Installation
+To run the client side of the app, run:
+```
+npm install
+cd client
+npm run dev
+``` 
+
+To run the server side of the app, run:
+```
+npm install
+cd server
+npm run dev
+``` 
+
 ## Possible features
 The website is fully working, but I plan on gradually adding more features in the future.
 - "Show first letter" button to lessons

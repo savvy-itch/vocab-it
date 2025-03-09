@@ -62,7 +62,7 @@ export default function DeleteVocabBtn() {
   return (
     <AlertDialog>
       <AlertDialogTrigger 
-        className="flex gap-1 items-center rounded-lg py-2 px-3 font-semibold text-white bg-secondaryBg-light hover:bg-hoverSecondaryBg focus:bg-hoverSecondaryBg transition-all hover:scale-105 focus:ring-2 focus:ring-red-400"
+        className="flex gap-1 items-center rounded-lg py-2 px-3 font-semibold text-white bg-secondary-bg-light hover:bg-hover-secondary-bg focus:bg-hover-secondary-bg transition-all hover:scale-105 focus:ring-2 focus:ring-red-400"
         disabled={!currVocab}
       >
         <HiTrash /> Delete <span className="hidden mobile:inline">Vocabulary</span>

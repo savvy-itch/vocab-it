@@ -40,12 +40,12 @@ const Login: NextPageWithLayout = () => {
       });
 
       if (!res.ok) {
-        if (res.status === 400) {
-          setErrMsg('Missing Username or Password');
-        } else if (res.status === 401) {
-          setErrMsg('Incorrect username or password');
+        const data = await res.json();
+        console.log(res.status, data.msg);
+        if (res.status === 401) {
+          setErrMsg(data.msg);
         } else if (res.status === 500) {
-          setErrMsg('Internal Server Error');
+          setErrMsg(data.msg);
         } else {
           setErrMsg('Login Failed');
         }
@@ -91,23 +91,22 @@ const Login: NextPageWithLayout = () => {
       <Head>
         <title>Log in | Vocab-It</title>
       </Head>
-      <section className="w-11/12 lg:w-3/5 mx-auto mb-10 py-5 px-4 sm:px-8 rounded-3xl bg-white text-customText-light dark:text-customText-dark dark:bg-customHighlight border border-zinc-400 dark:border-zinc-300 shadow-2xl">
+      <section className="w-11/12 lg:w-3/5 mx-auto mb-10 py-5 px-4 sm:px-8 rounded-3xl bg-white text-custom-text-light dark:text-custom-text-dark dark:bg-custom-highlight border border-zinc-400 dark:border-zinc-300 shadow-2xl">
         <form
-          className="flex flex-col gap-8"
           onSubmit={handleSubmit}
         >
-          <h1 className='text-2xl mobile:text-3xl md:text-4xl text-center font-semibold dark:text-customText-dark mb-2'>Log in to your account</h1>
+          <h1 className='text-2xl mobile:text-3xl md:text-4xl text-center font-semibold dark:text-custom-text-dark mb-5'>Log in to your account</h1>
           <p
-            className="text-red-400 text-center"
+            className="text-red-500 text-center my-5 h-4"
             ref={errRef}
             aria-live="assertive"
           >
             {errMsg}
           </p>
-          <label htmlFor="username">
+          <label className="my-5" htmlFor="username">
             <p>Username:</p>
             <input
-              className="text-lg leading-9 px-2 border rounded w-full sm:w-2/3 lg:w-1/2"
+              className="text-lg leading-9 px-2 border rounded-sm w-full sm:w-2/3 lg:w-1/2"
               ref={userRef}
               type="text"
               id="username"
@@ -122,11 +121,11 @@ const Login: NextPageWithLayout = () => {
             />
           </label>
 
-          <div>
+          <div className="my-5">
             <label htmlFor="password">
               <p>Password:</p>
               <input
-                className="text-lg leading-9 px-2 border rounded w-full sm:w-2/3 lg:w-1/2"
+                className="text-lg leading-9 px-2 border rounded-sm w-full sm:w-2/3 lg:w-1/2"
                 type={showPwd ? "text" : "password"}
                 id="password"
                 placeholder="Enter password..."
@@ -137,17 +136,17 @@ const Login: NextPageWithLayout = () => {
                 onChange={(e) => setPwd(e.target.value)}
               />
             </label>
-            <button className="ml-4" type="button" onClick={() => setShowPwd(!showPwd)}>
+            <button className="ml-4 hover:cursor-pointer" type="button" onClick={() => setShowPwd(!showPwd)}>
               {showPwd ? <FaEye /> : <FaEyeSlash />}
             </button>
           </div>
           <button
-            className="rounded-full bg-white mobile:bg-btnBg mobile:hover:bg-hoverBtnBg mobile:focus:bg-hoverBtnBg mobile:text-white cursor-pointer text-lg mobile:px-3 mobile:py-2 mobile:rounded"
+            className="w-full my-5 rounded-full bg-white mobile:bg-btn-bg mobile:hover:bg-hover-btn-bg mobile:focus:bg-hover-btn-bg mobile:text-white cursor-pointer text-lg mobile:px-3 mobile:py-2 mobile:rounded-sm"
           >
             Log In
           </button>
         </form>
-        <p className="dark:text-customText-dark mt-2">
+        <p className="dark:text-custom-text-dark mt-2">
           Don&#39;t have an account?<br />
           <span>
             <Link className="underline" href="/auth/register">Sign Up</Link>

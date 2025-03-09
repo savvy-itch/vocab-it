@@ -7,15 +7,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import User from "../models/User.js";
+import User from "../models/User";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import mongoose from "mongoose";
+const USER_REGEX = /^(?=.*[A-Za-z])[A-Za-z0-9]{3,16}$/;
+const PWD_REGEX = /^(?=.*[A-Z])(?=.*[!@#$%\-\+=_]).{8,20}$/;
 function handleNewUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { username, pwd } = req.body;
         if (!username || !pwd) {
             return res.status(400).json({ 'message': 'Username and password are required' });
+        }
+        if (USER_REGEX.test(username)) {
+            return res.status(400).json({ 'message': 'Invalid username' });
+        }
+        if (PWD_REGEX.test(pwd)) {
+            return res.status(400).json({ 'message': 'Invalid password' });
         }
         const duplicate = yield User.findOne({ username }).exec();
         if (duplicate) {
@@ -35,8 +43,8 @@ function handleNewUser(req, res) {
                     "username": username,
                     "roles": [1305]
                 }
-            }, accessSecret, { expiresIn: '10m' });
-            const refreshToken = jwt.sign({ "_id": userId }, refreshSecret, { expiresIn: '1d' });
+            }, accessSecret, { expiresIn: '10s' });
+            const refreshToken = jwt.sign({ "_id": userId }, refreshSecret, { expiresIn: '20s' });
             const result = yield User.create({
                 "_id": userId,
                 "username": username,

@@ -28,12 +28,21 @@ const useAuth = () => {
 
     if (res.status === 403 || res.status === 401) {
       const newAccessToken = await refresh();
+      if (!newAccessToken) {
+        console.warn("Refresh failed, user must authenticate again.");
+        return res;
+      }
       config.headers['Authorization'] = `Bearer ${newAccessToken}`;
       res = await fetch(url, config);
+
+      if (res.status === 403 || res.status === 401) {
+        console.warn("Token refresh didn't resolve the issue, logging out.");
+        return res;
+      }
     }
     return res;
   }
-  return fetchWithAuth
+  return fetchWithAuth;
 }
 
 export default useAuth;

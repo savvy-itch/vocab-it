@@ -68,13 +68,13 @@ export default function ProfileWordSection({checkSingleEdit}: {checkSingleEdit: 
 
   return (
     <article>
-      <h2 className='text-xl mobile:text-2xl md:text-3xl font-bold dark:text-customText-dark mb-4'>Lessons</h2>
-      <h3 className="text-base mobile:text-lg md:text-xl font-bold dark:text-customText-dark my-4">Words per lesson:</h3>
+      <h2 className='text-xl mobile:text-2xl md:text-3xl font-bold dark:text-custom-text-dark mb-4'>Lessons</h2>
+      <h3 className="text-base mobile:text-lg md:text-xl font-bold dark:text-custom-text-dark my-4">Words per lesson:</h3>
       {isEditWordAmount ? (
         <form className="my-3 max-w-max" onSubmit={updateWordsAmount}>
           <div className="flex gap-3 justify-between items-center">
             <input 
-              className="text-lg text-center leading-9 px-2 rounded border border-zinc-400 dark:border-zinc-300" 
+              className="text-lg text-center leading-9 px-2 rounded-sm border border-zinc-400 dark:border-zinc-300" 
               value={wordsPerLesson} 
               onChange={(e) => setWordsPerLesson(Number(e.target.value))} 
               onKeyDown={checkForAbort}
@@ -98,11 +98,11 @@ export default function ProfileWordSection({checkSingleEdit}: {checkSingleEdit: 
         </form>
       ) : (
         <div className="flex my-3 w-1/2 mobile:w-1/3 sm:w-2/12 gap-2 items-center">
-          <p className="text-lg text-center font-semibold dark:text-customText-dark border dark:bg-mainBg-dark px-2 py-1 w-20 rounded">
+          <p className="text-lg text-center font-semibold dark:text-custom-text-dark border dark:bg-main-bg-dark px-2 py-1 w-20 rounded-sm">
             {wordsPerLesson}
           </p>
           <button 
-            className="dark:text-customText-dark py-1 text-lg"
+            className="dark:text-custom-text-dark py-1 text-lg"
             aria-label="edit"
             onClick={enterEditWordsMode}
           >
@@ -110,7 +110,7 @@ export default function ProfileWordSection({checkSingleEdit}: {checkSingleEdit: 
           </button>
         </div>
         )}
-      <div className="h-px w-full dark:bg-mainBg-dark mt-3 mb-5" />
+      <div className="h-px w-full dark:bg-main-bg-dark mt-3 mb-5" />
     </article>
   )
 }

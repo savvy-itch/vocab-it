@@ -38,7 +38,7 @@ async function handleRefreshToken(req: Request, res: Response) {
         }
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: '20m' }
+      { expiresIn: '10s' }
     );
     res.json({ accessToken });
   } catch (error) {

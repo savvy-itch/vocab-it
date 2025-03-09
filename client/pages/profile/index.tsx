@@ -90,8 +90,8 @@ const Profile: NextPageWithLayout = () => {
         <title>Account | Vocab-It</title>
       </Head>
 
-      <section className="w-full mobile:w-11/12 lg:w-3/5 mx-auto mb-10 py-5 px-4 sm:px-8 rounded-3xl bg-white text-customText-light dark:text-customText-dark dark:bg-customHighlight border border-zinc-400 dark:border-zinc-300 shadow-2xl">
-        <h1 className='text-2xl mobile:text-3xl md:text-4xl text-center font-semibold dark:text-customText-dark mb-4'>My profile</h1>
+      <section className="w-full mobile:w-11/12 lg:w-3/5 mx-auto mb-10 py-5 px-4 sm:px-8 rounded-3xl bg-white text-custom-text-light dark:text-custom-text-dark dark:bg-custom-highlight border border-zinc-400 dark:border-zinc-300 shadow-2xl">
+        <h1 className='text-2xl mobile:text-3xl md:text-4xl text-center font-semibold dark:text-custom-text-dark mb-4'>My profile</h1>
         <ProfileUsernameSection checkSingleEdit={checkSingleEdit} />
         <ProfileAddVocabSection checkSingleEdit={checkSingleEdit} />
         <ProfileWordSection checkSingleEdit={checkSingleEdit} />

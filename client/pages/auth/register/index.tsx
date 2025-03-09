@@ -125,12 +125,12 @@ const Registration: NextPageWithLayout = () => {
       <Head>
         <title>Registration</title>
       </Head>
-      <section className="w-11/12 lg:w-3/5 mx-auto mb-10 py-5 px-4 sm:px-8 rounded-3xl bg-white text-customText-light dark:text-customText-dark dark:bg-customHighlight border border-zinc-400 dark:border-zinc-300 shadow-2xl">
+      <section className="w-11/12 lg:w-3/5 mx-auto mb-10 py-5 px-4 sm:px-8 rounded-3xl bg-white text-custom-text-light dark:text-custom-text-dark dark:bg-custom-highlight border border-zinc-400 dark:border-zinc-300 shadow-2xl">
         <form
           className="flex flex-col gap-8"
           onSubmit={handleSubmit}
         >
-          <h1 className='text-2xl mobile:text-3xl md:text-4xl text-center font-semibold dark:text-customText-dark mb-2'>Create an account</h1>
+          <h1 className='text-2xl mobile:text-3xl md:text-4xl text-center font-semibold dark:text-custom-text-dark mb-2'>Create an account</h1>
           <p
             className="text-red-400 text-center"
             ref={errRef}
@@ -146,7 +146,7 @@ const Registration: NextPageWithLayout = () => {
                   ? 'border-white'
                   : (userHasLetter && userLong)
                     ? 'border-green-500'
-                    : 'border-red-500'} border text-lg leading-9 px-2 rounded w-full sm:w-2/3 lg:w-1/2`}
+                    : 'border-red-500'} border text-lg leading-9 px-2 rounded-sm w-full sm:w-2/3 lg:w-1/2`}
                 ref={userRef}
                 type="text"
                 id="username"
@@ -171,7 +171,7 @@ const Registration: NextPageWithLayout = () => {
                   ? 'border-white'
                   : (pwdLong && pwdSymbol && pwdUpperCase)
                     ? 'border-green-500'
-                    : 'border-red-500'} border text-lg leading-9 px-2 rounded w-full sm:w-2/3 lg:w-1/2`}
+                    : 'border-red-500'} border text-lg leading-9 px-2 rounded-sm w-full sm:w-2/3 lg:w-1/2`}
                 type={showPwd ? "text" : "password"}
                 id="password"
                 required
@@ -184,7 +184,7 @@ const Registration: NextPageWithLayout = () => {
                 onBlur={() => setPwdFocus(false)}
               />
             </label>
-            <button className="ml-4" type="button" onClick={() => setShowPwd(!showPwd)}>
+            <button className="ml-4 hover:cursor-pointer" type="button" onClick={() => setShowPwd(!showPwd)}>
               {showPwd ? <FaEye /> : <FaEyeSlash />}
             </button>
             <InputRequirement isInputEmpty={pwd.length === 0} requirement={pwdLong} text={`Must be ${PWD_MIN_LENGTH}-${PWD_MAX_LENGTH} characters long`} />
@@ -200,7 +200,7 @@ const Registration: NextPageWithLayout = () => {
                   ? 'border-white'
                   : validMatch
                     ? 'border-green-500'
-                    : 'border-red-500'} border text-lg leading-9 px-2 rounded w-full sm:w-2/3 lg:w-1/2`}
+                    : 'border-red-500'} border text-lg leading-9 px-2 rounded-sm w-full sm:w-2/3 lg:w-1/2`}
                 type={confirmPwd ? "text" : "password"}
                 id="confirm-password"
                 required
@@ -211,18 +211,18 @@ const Registration: NextPageWithLayout = () => {
                 onBlur={() => setMatchFocus(false)}
               />
             </label>
-            <button className="ml-4" type="button" onClick={() => setConfirmPwd(!confirmPwd)}>
+            <button className="ml-4 hover:cursor-pointer" type="button" onClick={() => setConfirmPwd(!confirmPwd)}>
               {confirmPwd ? <FaEye /> : <FaEyeSlash />}
             </button>
           </div>
           <button
-            className="rounded-full bg-white mobile:bg-btnBg mobile:hover:bg-hoverBtnBg mobile:focus:bg-hoverBtnBg mobile:text-white cursor-pointer text-lg mobile:px-3 mobile:py-2 mobile:rounded disabled:text-gray-400 disabled:cursor-not-allowed"
+            className="rounded-full bg-white mobile:bg-btn-bg mobile:hover:bg-hover-btn-bg mobile:focus:bg-hover-btn-bg mobile:text-white cursor-pointer text-lg mobile:px-3 mobile:py-2 mobile:rounded-sm disabled:text-gray-400 disabled:cursor-not-allowed"
             disabled={!userHasLetter || !userLong || !pwdLong || !pwdUpperCase || !pwdSymbol || !validMatch ? true : false}
           >
             Sign Up
           </button>
         </form>
-        <p className="dark:text-customText-dark mt-2">
+        <p className="dark:text-custom-text-dark mt-2">
           Already have an account?<br />
           <span>
             <Link className="underline" href="/auth/login">Sign In</Link>

@@ -7,8 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import User from "../models/User.js";
-import Vocabulary from "../models/Vocabulary.js";
+import User from "../models/User";
+import Vocabulary from "../models/Vocabulary";
 function getProfile(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {

@@ -90,16 +90,16 @@ export default function ProfileUsernameSection({ checkSingleEdit }: { checkSingl
   if (isLoading) {
     return (
       <div>
-        <h2 className='text-xl mobile:text-2xl md:text-3xl font-bold dark:text-customText-dark mb-4'>Username</h2>
+        <h2 className='text-xl mobile:text-2xl md:text-3xl font-bold dark:text-custom-text-dark mb-4'>Username</h2>
         <Skeleton className="my-3 w-32 h-[38px] sm:w-2/12" />
-        <div className="h-px w-full dark:bg-mainBg-dark mt-3 mb-5" />
+        <div className="h-px w-full dark:bg-main-bg-dark mt-3 mb-5" />
       </div>
     )
   }
 
   return (
     <article>
-      <h2 className='text-xl mobile:text-2xl md:text-3xl font-bold dark:text-customText-dark mb-4'>Username</h2>
+      <h2 className='text-xl mobile:text-2xl md:text-3xl font-bold dark:text-custom-text-dark mb-4'>Username</h2>
       {isEditUsername ? (
         <>
           <form
@@ -109,7 +109,7 @@ export default function ProfileUsernameSection({ checkSingleEdit }: { checkSingl
           >
             <div>
               <input
-                className="text-lg leading-9 px-2 border rounded"
+                className="text-lg leading-9 px-2 border rounded-sm"
                 value={usernameInput}
                 onChange={(e) => setUsernameInput(e.target.value)}
                 onKeyDown={checkForAbort}
@@ -132,11 +132,11 @@ export default function ProfileUsernameSection({ checkSingleEdit }: { checkSingl
         </>
       ) : (
         <div className="flex gap-2 my-3 w-fit sm:w-2/12 justify-between items-center">
-          <p className="text-lg leading-[38px] dark:text-customText-dark">
+          <p className="text-lg leading-[38px] dark:text-custom-text-dark">
             {username}
           </p>
           <button
-            className="dark:text-customText-dark py-1 text-lg"
+            className="dark:text-custom-text-dark py-1 text-lg"
             aria-label='edit'
             onClick={enterEditUsernameMode}
           >
@@ -144,7 +144,7 @@ export default function ProfileUsernameSection({ checkSingleEdit }: { checkSingl
           </button>
         </div>
       )}
-      <div className="h-px w-full dark:bg-mainBg-dark mt-3 mb-5" />
+      <div className="h-px w-full dark:bg-main-bg-dark mt-3 mb-5" />
     </article>
   )
 }

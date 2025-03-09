@@ -160,11 +160,11 @@ export default function SingleWord({ word, vocab, checkSingleEdit }: SingleWordP
     <article className="text-sm mobile:text-base">
       {isEditSingleWord ? (
         <form
-          className="flex justify-between my-1 p-2 rounded-md dark:border-mainBg-dark hover:bg-slate-100 dark:hover:bg-customHighlight2 focus:bg-slate-100 dark:focus:bg-customHighlight2 transition-colors"
+          className="flex justify-between my-1 p-2 rounded-md dark:border-main-bg-dark hover:bg-slate-100 dark:hover:bg-custom-highlight2 focus:bg-slate-100 dark:focus:bg-custom-highlight2 transition-colors"
           onSubmit={submitEdit}
         >
           <input
-            className="w-1/3 pl-2 border border-slate-600 rounded"
+            className="w-1/3 pl-2 border border-slate-600 rounded-sm"
             value={newWord}
             onChange={(e) => setNewWord(e.target.value)}
             onKeyDown={checkForAbort}
@@ -172,7 +172,7 @@ export default function SingleWord({ word, vocab, checkSingleEdit }: SingleWordP
             autoFocus
           />
           <input
-            className="w-1/3 pl-2 border border-slate-600 rounded"
+            className="w-1/3 pl-2 border border-slate-600 rounded-sm"
             value={newTranslation}
             onChange={(e) => setNewTranslation(e.target.value)}
             onKeyDown={checkForAbort}
@@ -183,18 +183,18 @@ export default function SingleWord({ word, vocab, checkSingleEdit }: SingleWordP
             aria-label="update"
             onClick={submitEdit}
           >
-            <HiCheckCircle className="text-btnBg hover:text-hoverBtnBg focus:text-hoverBtnBg h-8 w-8" />
+            <HiCheckCircle className="text-btn-bg hover:text-hover-btn-bg focus:text-hover-btn-bg h-8 w-8" />
           </button>
           <button
             className="rounded-full bg-white"
             aria-label="cancel"
             onClick={exitEditWordMode}
           >
-            <HiMiniXCircle className="text-secondaryBg-light hover:text-secondaryBg-light/80 focus:text-secondaryBg-light/80 h-8 w-8" />
+            <HiMiniXCircle className="text-secondary-bg-light hover:text-secondary-bg-light/80 focus:text-secondary-bg-light/80 h-8 w-8" />
           </button>
         </form>
       ) : (
-        <div className="flex justify-between items-center my-1 p-2 rounded-md dark:border-mainBg-dark hover:bg-slate-100 dark:hover:bg-customHighlight2 focus:bg-slate-100 dark:focus:bg-customHighlight2 transition-colors">
+        <div className="flex justify-between items-center my-1 p-2 rounded-md dark:border-main-bg-dark hover:bg-slate-100 dark:hover:bg-custom-highlight2 focus:bg-slate-100 dark:focus:bg-custom-highlight2 transition-colors">
           <p className="w-2/5">{word.word}</p>
           <p className="w-1/4 break-words">{word.translation}</p>
           <div
@@ -216,7 +216,7 @@ export default function SingleWord({ word, vocab, checkSingleEdit }: SingleWordP
         </div>
       )}
       {/* separator */}
-      {vocab.words[vocab.words.length - 1]?.word !== word.word && <div className="h-px w-full dark:bg-mainBg-dark" />}
+      {vocab.words[vocab.words.length - 1]?.word !== word.word && <div className="h-px w-full dark:bg-main-bg-dark" />}
     </article>
   )
 }

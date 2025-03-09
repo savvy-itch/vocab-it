@@ -85,7 +85,7 @@ export default function NewVocabDialog({ vocabTitle, setVocabTitle, invalidInput
         </Label>
         <form onSubmit={createVocab}>
           <Input id="title"
-            className="my-2 dark:text-customText-dark border dark:bg-mainBg-dark"
+            className="my-2 dark:text-custom-text-dark border dark:bg-main-bg-dark"
             value={vocabTitle} 
             placeholder="Vocab title"
             onChange={(e) => setVocabTitle(e.target.value)}

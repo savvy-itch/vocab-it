@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import Vocabulary from "../models/Vocabulary.js";
+import Vocabulary from "../models/Vocabulary";
 import { v4 as uuidv4 } from 'uuid';
 function addWord(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
