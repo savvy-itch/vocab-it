@@ -55,11 +55,12 @@ const Vocabulary: NextPageWithLayout = () => {
     const existingVocab = vocabs.find(v => v._id === router.query.id);
     if (existingVocab) {
       setCurrVocab(existingVocab);
-      const existingWords: WordLocal[] = [];
+      let existingWords: WordLocal[] = [];
       existingVocab.wordIds.forEach(id => {
         existingWords.push(words[id]);
       });
       console.log(existingWords);
+      existingWords = existingWords.filter(Boolean);
       setCurrWords(existingWords);
     }
     setIsLoading(false);

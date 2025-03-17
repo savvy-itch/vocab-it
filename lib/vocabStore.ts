@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { CombinedStore, LangCodes, Vocab, VocabLocal, VocabLocalStore, Word, WordLocal } from "./types";
+import { LangCodes, VocabLocal, VocabLocalStore } from "./types";
 import { nanoid } from "nanoid";
 
 export const useVocabStore = create<VocabLocalStore>()(
@@ -37,7 +37,7 @@ export const useVocabStore = create<VocabLocalStore>()(
 
       deleteWordId: (vocabId: string, wordId: string) => {
         const updatedVocabs = get().vocabs.map(v => v._id === vocabId
-          ? { ...v, words: v.wordIds.filter(w => w !== wordId) }
+          ? { ...v, wordIds: v.wordIds.filter(w => w !== wordId) }
           : v
         );
         set({ vocabs: updatedVocabs });

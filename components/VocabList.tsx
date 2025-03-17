@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Vocab, VocabLocal } from '@/lib/types';
+import React, { useState } from 'react';
+import { VocabLocal } from '@/lib/types';
 import VocabListRow from './VocabListRow';
 import { ScrollArea } from './ui/scroll-area';
 import VocabListSkeleton from './skeletons/VocabListSkeleton';

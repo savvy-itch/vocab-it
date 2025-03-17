@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { atma, BASE_URL } from '../lib/globals';
+import React, { useState } from 'react';
+import { atma } from '../lib/globals';
 import { useTheme } from 'next-themes';
-import { Vocab, VocabLocal } from '@/lib/types';
+import { VocabLocal } from '@/lib/types';
 import dynamic from 'next/dynamic';
 
 import Image from 'next/image';

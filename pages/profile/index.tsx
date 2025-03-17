@@ -30,34 +30,6 @@ const Profile: NextPageWithLayout = () => {
     return true;
   }
 
-  // useEffect(() => {
-  //   const controller = new AbortController();
-
-  //   const getProfileData = async () => {
-  //     try {
-  //       const res = await fetchWithAuth(`${BASE_URL}/profile`, {
-  //         signal: controller.signal
-  //       });
-
-  //       if (!res.ok) {
-  //         throw new Error('Failed to fetch profile data');
-  //       }
-
-  //       const data = await res.json();
-  //       setVocabs(data.vocabularies);
-  //       setUsername(data.username);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-
-  //   checkToken(getProfileData);
-
-  //   return () => {
-  //     controller.abort();
-  //   }
-  // }, [accessToken]);
-
   useEffect(() => {
     // reset all active edit modes 
     switch (true) {

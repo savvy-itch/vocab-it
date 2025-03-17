@@ -7,29 +7,32 @@ import { useVocabStore } from '@/lib/vocabStore';
 import { LangCodes, VocabLocal } from '@/lib/types';
 
 export default function SelectLang({ vocab }: { vocab: VocabLocal}) {
-  const { vocabs, setLang } = useVocabStore(state => state);
+  const { setLang } = useVocabStore(state => state);
   const { displayPopup } = useDisplayPopup();
   const [isUpdating, setIsUpdating] = useState(false);
-  const [selectedLang, setSelectedLang] = useState<LangCodes>('default');
+  const [selectedLang, setSelectedLang] = useState<LangCodes>();
 
   function handleLangChange(updatedLang: LangCodes) {
+    console.log({updatedLang});
     if (updatedLang !== selectedLang) {
+      console.log('updatedLang !== selectedLang');
       setSelectedLang(updatedLang);
 
       if (updatedLang === 'default' || Object.keys(specialSymbols).includes(updatedLang)) {
+        console.log('inner if');
         setIsUpdating(true);
-        setLang(vocab._id, selectedLang);
+        setLang(vocab._id, updatedLang);
         displayPopup({ isError: false, msg: "Language has been updated" });
         setIsUpdating(false);
       }
     }
   };
 
-  // useEffect(() => {
-  //   if (currVocab && currVocab.lang) {
-  //     setSelectedLang(currVocab.lang);
-  //   }
-  // }, [currVocab]);
+  useEffect(() => {
+    if (vocab.lang) {
+      setSelectedLang(vocab.lang)
+    }
+  }, []);
 
   return (
     <section className="w-full flex items-start mx-auto gap-2 my-3">

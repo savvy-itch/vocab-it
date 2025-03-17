@@ -1,5 +1,5 @@
 import React from 'react';
-import { Answer, Word } from '@/lib/types';
+import { Answer, WordLocal } from '@/lib/types';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import {
@@ -13,14 +13,14 @@ import {
 
 type ResultProps = {
   allAnswers: Answer[],
-  words: Word[],
+  words: WordLocal[],
 }
 
 export default function LessonResult({allAnswers, words}: ResultProps) {
   const wrongAnswers: Answer[] = allAnswers.filter(a => a.userAnswer !== a.word);
-  const answeredCorrectly: number = allAnswers.length - wrongAnswers.length;
+  const answeredCorrectly = allAnswers.length - wrongAnswers.length;
 
-  const successPercentage: number = Math.round((answeredCorrectly / words.length) * 100);
+  const successPercentage = Math.round((answeredCorrectly / words.length) * 100);
 
   return (
     <section className="w-full p-4 sm:p-8 rounded-xl bg-white text-custom-text-light dark:text-custom-text-dark dark:bg-custom-highlight text-center shadow-2xl">
@@ -36,7 +36,7 @@ export default function LessonResult({allAnswers, words}: ResultProps) {
       {wrongAnswers.length > 0 && (
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
-            <AccordionTrigger className="text-lg">View mistakes</AccordionTrigger>
+            <AccordionTrigger className="text-lg hover:cursor-pointer">View mistakes</AccordionTrigger>
             <AccordionContent>
               <Table className="text-lg">
                 <TableHeader>

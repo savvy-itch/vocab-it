@@ -152,8 +152,8 @@ export default function SingleWord({ word, vocab, checkSingleEdit }: SingleWordP
             title={progressStatus}
           />
           <div className="flex gap-1">
-            <button className="text-base" aria-label="edit" onClick={enterEditWordMode}><HiPencilSquare /></button>
-            <button className="text-base" aria-label="delete" onClick={deleteWordFromStorage}><HiTrash /></button>
+            <button className="text-base hover:cursor-pointer" aria-label="edit" onClick={enterEditWordMode}><HiPencilSquare /></button>
+            <button className="text-base hover:cursor-pointer" aria-label="delete" onClick={deleteWordFromStorage}><HiTrash /></button>
           </div>
         </div>
       )}

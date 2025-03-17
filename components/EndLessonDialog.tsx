@@ -17,7 +17,7 @@ export default function EndLessonDialog() {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="w-16 text-sm mobile:text-base mobile:w-28 flex items-center justify-center rounded-lg py-2 font-semibold text-white bg-secondary-bg-light hover:bg-hover-secondary-bg transition-colors">
+      <AlertDialogTrigger className="w-16 text-sm mobile:text-base mobile:w-28 flex items-center justify-center rounded-lg py-2 font-semibold text-white bg-secondary-bg-light hover:bg-hover-secondary-bg hover:cursor-pointer transition-colors">
         End Lesson
       </AlertDialogTrigger>
       <AlertDialogContent className="flex flex-col items-center justify-center">

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { CheckSingleEditFunction } from '@/lib/types';
 import useProfileStore from '@/lib/profileStore';
-// import useVocabStore from '@/lib/store';
 import { useStore } from 'zustand';
 import { SOUND_VOLUME, errorSound } from '@/lib/globals';
 import useSound from 'use-sound';

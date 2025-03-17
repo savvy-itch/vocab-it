@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { Answer, Vocab, VocabLocalStore, Word, WordLocal, WordLocalStore } from "./types";
+import { Answer, WordLocal, WordLocalStore } from "./types";
 import { getProgressPercentage } from "./utils";
 import { nanoid } from 'nanoid';
 
@@ -60,6 +60,7 @@ export const useWordStore = create<WordLocalStore>()(
           if (currWord) {
             const isGuessCorrect = currWord.word === a.userAnswer;
             currWord.progress = getProgressPercentage(currWord.progress, currWord.trained, isGuessCorrect);
+            currWord.trained++;
           }
         });
         set({ words: updatedWords });
