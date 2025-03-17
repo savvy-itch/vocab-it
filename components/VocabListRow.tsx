@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Vocab, VocabLocal } from '@/lib/types';
+import { VocabLocal } from '@/lib/types';
 import useProfileStore from '@/lib/profileStore';
 import useSound from 'use-sound';
 import { useStore } from 'zustand';
@@ -18,7 +18,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { BASE_URL, SOUND_VOLUME, errorSound } from '@/lib/globals';
+import { SOUND_VOLUME, errorSound } from '@/lib/globals';
 import useDisplayPopup from '@/hooks/useDisplayPopup';
 import { useVocabStore } from '@/lib/vocabStore';
 

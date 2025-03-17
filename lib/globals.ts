@@ -4,7 +4,6 @@ const INITIAL_NUMBER: number = 3;
 const MAX_WORDS = 100;
 const SOUND_VOLUME = 0.25;
 
-// if you change these variables, the respective variables on the server-side must be edited in registerController as well!
 const USERNAME_MIN_LENGTH = 3;
 const USERNAME_MAX_LENGTH = 23;
 const PWD_MIN_LENGTH = 8;
