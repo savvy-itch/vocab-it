@@ -106,7 +106,7 @@ export default function SingleWord({ word, vocab, checkSingleEdit }: SingleWordP
           onSubmit={submitEdit}
         >
           <input
-            className="w-1/3 pl-2 border border-slate-600 rounded-sm"
+            className="w-1/3 pl-2 dark:bg-main-bg-dark border border-zinc-400 dark:border-zinc-300 rounded-sm"
             value={newWord}
             onChange={(e) => setNewWord(e.target.value)}
             onKeyDown={checkForAbort}
@@ -114,25 +114,25 @@ export default function SingleWord({ word, vocab, checkSingleEdit }: SingleWordP
             autoFocus
           />
           <input
-            className="w-1/3 pl-2 border border-slate-600 rounded-sm"
+            className="w-1/3 pl-2 dark:bg-main-bg-dark border border-zinc-400 dark:border-zinc-300 rounded-sm"
             value={newTranslation}
             onChange={(e) => setNewTranslation(e.target.value)}
             onKeyDown={checkForAbort}
             size={20}
           />
           <button
-            className="rounded-full bg-white"
+            className="rounded-full bg-white hover:cursor-pointer"
             aria-label="update"
             onClick={submitEdit}
           >
             <HiCheckCircle className="text-btn-bg hover:text-hover-btn-bg focus:text-hover-btn-bg h-8 w-8" />
           </button>
           <button
-            className="rounded-full bg-white"
+            className="rounded-full bg-white hover:cursor-pointer"
             aria-label="cancel"
             onClick={exitEditWordMode}
           >
-            <HiMiniXCircle className="text-secondary-bg-light hover:text-secondary-bg-light/80 focus:text-secondary-bg-light/80 h-8 w-8" />
+            <HiMiniXCircle className="text-secondary-bg-light hover:text-secondary-bg-light/80 focus:text-secondary-bg-light/95 h-8 w-8" />
           </button>
         </form>
       ) : (

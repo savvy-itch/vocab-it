@@ -40,7 +40,7 @@ export default function VocabTitleSection({ id, vocabTitle, checkSingleEdit }: {
     } else {
       editVocabTitle(id, title);
       toggleIsEditVocabTitle(); // to false
-      displayPopup({ isError: true, msg: "Vocabulary title has been updated" });
+      displayPopup({ isError: false, msg: "Vocabulary title has been updated" });
     }
   }
 
@@ -63,7 +63,7 @@ export default function VocabTitleSection({ id, vocabTitle, checkSingleEdit }: {
         >
           <div className="flex justify-between items-center gap-2">
             <input
-              className="text-2xl pl-2 leading-10 border border-slate-600 rounded-sm" type="text"
+              className="text-2xl pl-2 leading-10 dark:bg-main-bg-dark dark:border-zinc-300 border border-slate-600 rounded-sm" type="text"
               size={10}
               maxLength={15}
               value={title}
@@ -88,7 +88,7 @@ export default function VocabTitleSection({ id, vocabTitle, checkSingleEdit }: {
       <h1 className="text-2xl mobile:text-3xl md:text-4xl font-semibold dark:text-custom-text-dark">
         {title !== null ? title : "Loading..."}
       </h1>
-      {title !== null && <button aria-label="edit" onClick={enterEditTitleMode}><HiPencilSquare /></button>}
+      {title !== null && <button className="hover:cursor-pointer" aria-label="edit" onClick={enterEditTitleMode}><HiPencilSquare /></button>}
     </div>
   )
 }

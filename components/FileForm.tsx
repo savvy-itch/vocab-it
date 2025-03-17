@@ -95,6 +95,7 @@ export default function FileForm({ vocabId, vocabWordIds }: { vocabId: string, v
       }
     }
     if (uniqueWords.length > 0) {
+      console.log(uniqueWords);
       addCsv(vocabId, uniqueWords);
       uniqueWords.forEach(w => {
         addWordId(vocabId, w._id);

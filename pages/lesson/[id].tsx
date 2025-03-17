@@ -210,7 +210,7 @@ const Lesson: NextPageWithLayout = () => {
             <form className="my-3 flex justify-center" onSubmit={submitAnswer}>
               <input
                 ref={inputRef}
-                className="text-2xl leading-10 text-center rounded-sm border border-zinc-400 w-full mobile:w-auto dark:bg-main-bg-dark"
+                className="text-2xl leading-10 text-center rounded-sm border border-zinc-400 dark:border-zinc-300 w-full mobile:w-auto dark:bg-main-bg-dark"
                 type="text"
                 value={answer}
                 onChange={(e) => setAnswer(e.target.value)}

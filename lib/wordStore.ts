@@ -71,11 +71,7 @@ export const useWordStore = create<WordLocalStore>()(
 
         words.forEach(w => {
           if (w.vocabId === vocabId && w.word && w.translation) {
-            let wordId = nanoid();
-            while (updatedWords[wordId]) {
-              wordId = nanoid();
-            }
-            updatedWords[wordId] = w;
+            updatedWords[w._id] = w;
           }
         });
 

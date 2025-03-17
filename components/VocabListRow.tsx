@@ -106,7 +106,7 @@ export default function VocabListRow({ vocab }: { vocab: VocabLocal }) {
             <div className="w-2/5">
               <form onSubmit={updateTitle}>
                 <input
-                  className="leading-8 px-2 rounded-sm"
+                  className="leading-8 px-2 rounded-sm dark:bg-main-bg-dark border border-zinc-400 dark:border-zinc-300"
                   type="text"
                   value={title}
                   size={10}

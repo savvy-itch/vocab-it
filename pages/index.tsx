@@ -11,7 +11,7 @@ import HomeLayout from '@/components/HomeLayout';
 import Navbar from '@/components/Navbar';
 
 const Home: NextPageWithLayout = () => {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [imgSrc, setImgSrc] = useState<string>('/images/vocab-hero-dark.svg');
   const topSectionRef = useRef<HTMLElement>(null);
   const bottomSectionRef = useRef<HTMLElement>(null);
@@ -31,12 +31,12 @@ const Home: NextPageWithLayout = () => {
   }
 
   useEffect(() => {
-    if (!theme || theme === "dark") {
+    if (resolvedTheme === 'dark') {
       setImgSrc('/images/vocab-hero-dark.svg');
     } else {
-      setImgSrc('/images/vocab-hero.svg')
+      setImgSrc('/images/vocab-hero.svg');
     }
-  }, [theme])
+  }, [resolvedTheme]);
 
   return (
     <>
@@ -66,7 +66,7 @@ const Home: NextPageWithLayout = () => {
           </div>
           <button 
             className="absolute w-12 h-12 bottom-2 inset-x-0 mx-auto flex items-center border-custom-text-light dark:border-custom-text-dark hover:border-2 focus:border-2 hover:cursor-pointer rounded-full"
-            aria-label="down" 
+            aria-label="down"
             onClick={goDown}
           >
             <HiOutlineArrowDownCircle className="w-12 h-12 text-custom-text-light dark:text-custom-text-dark" />

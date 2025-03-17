@@ -59,7 +59,6 @@ const Vocabulary: NextPageWithLayout = () => {
       existingVocab.wordIds.forEach(id => {
         existingWords.push(words[id]);
       });
-      console.log(existingWords);
       existingWords = existingWords.filter(Boolean);
       setCurrWords(existingWords);
     }

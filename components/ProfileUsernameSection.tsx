@@ -73,7 +73,7 @@ export default function ProfileUsernameSection({ checkSingleEdit }: { checkSingl
           >
             <div>
               <input
-                className="text-lg leading-9 px-2 border rounded-sm"
+                className="text-lg leading-9 px-2 dark:bg-main-bg-dark border border-zinc-400 dark:border-zinc-300 rounded-sm"
                 value={usernameInput}
                 onChange={(e) => setUsernameInput(e.target.value)}
                 onKeyDown={checkForAbort}

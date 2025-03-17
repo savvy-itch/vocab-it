@@ -73,7 +73,7 @@ export default function ProfileAddVocabSection({checkSingleEdit}: {checkSingleEd
             onSubmit={createVocab}
           >
             <input 
-              className="text-lg leading-9 px-2 rounded-sm border border-zinc-400 dark:border-zinc-300 max-w-[150px]" 
+              className="text-lg leading-9 px-2 rounded-sm border dark:bg-main-bg-dark border-zinc-400 dark:border-zinc-300 max-w-[150px]" 
               value={newVocab} 
               onChange={(e) => setNewVocab(e.target.value)}
               onKeyDown={checkForAbort}
@@ -84,7 +84,7 @@ export default function ProfileAddVocabSection({checkSingleEdit}: {checkSingleEd
             />
             <button 
               className="rounded-full bg-white mobile:bg-btn-bg mobile:hover:bg-hover-btn-bg mobile:focus:bg-hover-btn-bg mobile:text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm"
-              aria-label="create" 
+              aria-label="create"
               onClick={createVocab}
             >              
               <p className="hidden mobile:inline">Create</p>

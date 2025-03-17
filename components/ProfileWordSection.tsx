@@ -74,7 +74,7 @@ export default function ProfileWordSection({checkSingleEdit}: {checkSingleEdit: 
         <form className="my-3 max-w-max" onSubmit={updateWordsAmount}>
           <div className="flex gap-3 justify-between items-center">
             <input 
-              className="text-lg text-center leading-9 px-2 rounded-sm border border-zinc-400 dark:border-zinc-300" 
+              className="text-lg text-center leading-9 px-2 rounded-sm dark:bg-main-bg-dark border border-zinc-400 dark:border-zinc-300" 
               value={wordsPerLesson} 
               onChange={(e) => setWordsPerLesson(Number(e.target.value))} 
               onKeyDown={checkForAbort}
