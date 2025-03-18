@@ -1,5 +1,5 @@
 # Vocab-It
-This is the client-side only version of Vocab-It. It aims to replicate the same functionality as the full stack version using the browser capabilities, i.e. without introducing database and server logic. [Live version]().
+This is the client-side only version of Vocab-It. It aims to replicate the same functionality as the full stack version using the browser capabilities, i.e. without introducing database and server logic. [Live version](https://vocab-it-clientside.vercel.app/). The purpose of this implementation is to serve as a demo of the app's functionality. The full stack version is located on `fullstack` branch.
 
 <p align="center">
 <a href="https://ibb.co/bKcj1By"><img src="https://i.ibb.co/DR0P4C6/Screenshot-3.jpg" alt="vocab-it screenshot" border="0"></a>
@@ -7,13 +7,6 @@ This is the client-side only version of Vocab-It. It aims to replicate the same 
  
 ## Description
 Users can learn words by completing lessons in the form of flash cards.
-
-## Stack
-- Next.js
-- Tailwind CSS
-- TypeScript
-- Shadcn/ui
-- Zustand
 
 ## Main features
 - create/edit/delete vocabularies;

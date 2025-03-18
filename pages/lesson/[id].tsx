@@ -46,6 +46,10 @@ const Lesson: NextPageWithLayout = () => {
   const router = useRouter();
   const [playClick] = useSound(clickSound, { volume: SOUND_VOLUME });
   const inputRef = useRef<HTMLInputElement>(null);
+  
+  useEffect(() => {
+    console.log(typeof window === "undefined");
+  }, []);
 
   function submitAnswer(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -118,7 +122,7 @@ const Lesson: NextPageWithLayout = () => {
         setLessonVolume(existingVocab.wordIds.length);
         setLessonWords(randomizeWords(wordsForLesson, existingVocab.wordIds.length));
       } else {
-        setLessonWords(randomizeWords(wordsForLesson, existingVocab.wordIds.length));
+        setLessonWords(randomizeWords(wordsForLesson, lessonVolume));
       }
       setIsLoading(false);
     }
@@ -127,7 +131,6 @@ const Lesson: NextPageWithLayout = () => {
   // lesson end
   useEffect(() => {
     if (currWord !== initialWordIdx && currWord > lessonVolume) {
-      console.log('updateProgress()');
       updateProgress(allAnswers);
     }
   }, [router, currWord, lessonVolume]);

@@ -13,13 +13,10 @@ export default function SelectLang({ vocab }: { vocab: VocabLocal}) {
   const [selectedLang, setSelectedLang] = useState<LangCodes>();
 
   function handleLangChange(updatedLang: LangCodes) {
-    console.log({updatedLang});
     if (updatedLang !== selectedLang) {
-      console.log('updatedLang !== selectedLang');
       setSelectedLang(updatedLang);
 
       if (updatedLang === 'default' || Object.keys(specialSymbols).includes(updatedLang)) {
-        console.log('inner if');
         setIsUpdating(true);
         setLang(vocab._id, updatedLang);
         displayPopup({ isError: false, msg: "Language has been updated" });
