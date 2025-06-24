@@ -18,7 +18,16 @@ To run the client side of the app, run:
 ```
 npm install
 npm run dev
-``` 
+```
+
+## Update dependencies
+```bash
+# check for updates
+npx npm-check-updates
+
+# update package.json
+npx npm-check-updates -u 
+```
 
 ## Possible features
 The website is fully working, but I plan on gradually adding more features in the future.
