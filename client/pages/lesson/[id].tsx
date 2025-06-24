@@ -79,8 +79,11 @@ const Lesson: NextPageWithLayout = () => {
   }
 
   function handleSpecialKeyClick(key: string) {
-    setAnswer((prev: string) => prev + (isUpperCase ? key.toUpperCase() : key))
-    inputRef.current && inputRef.current.focus();
+    if (inputRef.current) {
+      const cursorPos = inputRef.current.selectionStart ?? 0;
+      setAnswer((prev: string) => prev.substring(0, cursorPos) + (isUpperCase ? key.toUpperCase() : key) + prev.substring(cursorPos));
+      setIsUpperCase(false);
+    }
   }
 
   // get vocab by default
@@ -267,45 +270,49 @@ const Lesson: NextPageWithLayout = () => {
             </form>
           </div>
         </section>
-        <div className="flex justify-between mt-5 px-3">
-          <EndLessonDialog />
-          <button
-            className="w-16 text-sm mobile:text-base mobile:w-28 flex justify-center items-center rounded-lg py-2 font-semibold text-white bg-zinc-600 hover:bg-zinc-500 focus:bg-zinc-500 transition-colors disabled:text-gray-400"
-            onClick={registerAnswer}
-            disabled={!isTokenChecked || isLoading}
-          >
-            Skip
-          </button>
-          <button
-            className="w-16 text-sm mobile:text-base mobile:w-28 flex justify-center items-center rounded-lg py-2 font-semibold text-white bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg transition-colors disabled:text-gray-400"
-            onClick={registerAnswer}
-            disabled={!isTokenChecked || isLoading}
-          >
-            OK
-          </button>
-        </div>
-        {currVocab?.lang && Object.getOwnPropertyNames(specialSymbols).includes(currVocab.lang) && (
-          <section className="flex justify-center gap-2 flex-wrap mt-3">
-            {currVocab?.lang !== 'default' && (
+        {(isTokenChecked && !isLoading && words[currWord - 1]) && (
+          <>
+            <div className="flex justify-between mt-5 px-3">
+              <EndLessonDialog />
               <button
-                className="px-3 py-2 bg-gray-300 text-custom-text-light rounded-md shadow-md font-mono text-xl font-semibold transition-all duration-100 ease-in-out hover:bg-gray-400"
-                onClick={() => setIsUpperCase(!isUpperCase)}
-                type="button"
+                className="w-16 text-sm mobile:text-base mobile:w-28 flex justify-center items-center rounded-lg py-2 font-semibold text-white bg-zinc-600 hover:bg-zinc-500 focus:bg-zinc-500 transition-colors disabled:text-gray-400"
+                onClick={registerAnswer}
+                disabled={!isTokenChecked || isLoading}
               >
-                {isUpperCase ? <BsCapslockFill /> : <BsCapslock />}
+                Skip
               </button>
+              <button
+                className="w-16 text-sm mobile:text-base mobile:w-28 flex justify-center items-center rounded-lg py-2 font-semibold text-white bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg transition-colors disabled:text-gray-400"
+                onClick={registerAnswer}
+                disabled={!isTokenChecked || isLoading}
+              >
+                OK
+              </button>
+            </div>
+            {currVocab?.lang && Object.getOwnPropertyNames(specialSymbols).includes(currVocab.lang) && (
+              <section className="flex justify-center gap-2 flex-wrap mt-3">
+                {currVocab?.lang !== 'default' && (
+                  <button
+                    className="px-3 py-2 bg-gray-300 text-custom-text-light rounded-md shadow-md font-mono text-xl font-semibold transition-all duration-100 ease-in-out hover:bg-gray-400"
+                    onClick={() => setIsUpperCase(!isUpperCase)}
+                    type="button"
+                  >
+                    {isUpperCase ? <BsCapslockFill /> : <BsCapslock />}
+                  </button>
+                )}
+                {currVocab?.lang && currVocab.lang !== 'default' && specialSymbols[currVocab?.lang].map(k => {
+                  return <button
+                    key={k}
+                    className="px-3 py-2 bg-gray-300 text-custom-text-light rounded-md shadow-md font-mono text-xl font-semibold transition-all duration-100 ease-in-out hover:bg-gray-400"
+                    type="button"
+                    onClick={() => handleSpecialKeyClick(k)}
+                  >
+                    {isUpperCase ? k.toUpperCase() : k}
+                  </button>
+                })}
+              </section>
             )}
-            {currVocab?.lang && currVocab.lang !== 'default' && specialSymbols[currVocab?.lang].map(k => {
-              return <button
-                key={k}
-                className="px-3 py-2 bg-gray-300 text-custom-text-light rounded-md shadow-md font-mono text-xl font-semibold transition-all duration-100 ease-in-out hover:bg-gray-400"
-                type="button"
-                onClick={() => handleSpecialKeyClick(k)}
-              >
-                {isUpperCase ? k.toUpperCase() : k}
-              </button>
-            })}
-          </section>
+          </>
         )}
       </div>
     </RequireAuth>
