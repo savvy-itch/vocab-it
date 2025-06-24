@@ -1,5 +1,5 @@
 # Vocab-It
-A web app for learning languages by creating your own vocabularies. [Live version](https://vocab-it-frontend.vercel.app/).
+A web app for learning languages in the form of creating fine-tuned vocabularies for practicing. For live demo, check the `clientside` version of the project. 
 
 <p align="center">
 <a href="https://ibb.co/bKcj1By"><img src="https://i.ibb.co/DR0P4C6/Screenshot-3.jpg" alt="vocab-it screenshot" border="0"></a>
@@ -36,6 +36,15 @@ npm install
 cd server
 npm run dev
 ``` 
+
+## Update dependencies (client)
+```bash
+# check for updates
+npx npm-check-updates
+
+# update package.json
+npx npm-check-updates -u 
+```
 
 ## Possible features
 The website is fully working, but I plan on gradually adding more features in the future.
