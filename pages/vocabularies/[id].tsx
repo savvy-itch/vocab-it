@@ -50,6 +50,14 @@ const Vocabulary: NextPageWithLayout = () => {
     return true;
   }
 
+  function calcWordsProgress(): number {
+    if (currWords.length === 0) {
+      return 0;
+    }
+    const totalRate: number = currWords.reduce((acc, val) => acc + val.progress, 0 );
+    return Math.round(totalRate / currWords.length);
+  }
+
   useEffect(() => {
     setIsLoading(true);
     const existingVocab = vocabs.find(v => v._id === router.query.id);
@@ -112,6 +120,7 @@ const Vocabulary: NextPageWithLayout = () => {
             {currWords.length === 1 ? '1 word' : `${currWords.length} words`}
           </p>
         </div>
+        <p className="mobile:text-lg mx-auto m">Correctness rate: <span className="font-bold">{calcWordsProgress()}%</span></p>
         {currVocab && <SelectLang vocab={currVocab} />}
         <div className="my-5 flex justify-between items-center">
           {(currWords.length > 0 && router.query.id) ? (
@@ -147,13 +156,14 @@ const Vocabulary: NextPageWithLayout = () => {
             : (
               currWords.length > 0 ? (
                 <ScrollArea className="h-[250px] rounded-md border px-2 sm:px-4 py-3">
-                  {currWords.map(w => {
+                  {currWords.map((w, i) => {
                     return (
                       <SingleWord
                         key={w._id}
                         word={w}
                         vocab={currVocab as VocabLocal}
                         checkSingleEdit={checkSingleEdit}
+                        isLastWord={i === currWords.length - 1}
                       />
                     )
                   })}
