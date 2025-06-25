@@ -59,7 +59,7 @@ const Vocabulary: NextPageWithLayout = () => {
       existingVocab.wordIds.forEach(id => {
         existingWords.push(words[id]);
       });
-      existingWords = existingWords.filter(Boolean);
+      existingWords = existingWords.filter(Boolean).sort((a, b) => a.word.localeCompare(b.word));
       setCurrWords(existingWords);
     }
     setIsLoading(false);
