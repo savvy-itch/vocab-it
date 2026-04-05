@@ -16,40 +16,27 @@ import { Progress } from "@/components/ui/progress"
 import { BsCapslock, BsCapslockFill } from "react-icons/bs";
 import { useVocabStore } from '@/lib/vocabStore';
 import { useWordStore } from '@/lib/wordStore';
+import { randomizeWords } from '@/lib/utils';
 
+const pageTitle = "Lesson | Vocab-It";
 const initialWordIdx: number = 1;
-
-function randomizeWords(array: WordLocal[], volume: number): WordLocal[] {
-  let randomizedWords: WordLocal[] = [];
-  let sourceArray: WordLocal[] = array;
-  for (let i = 0; i < volume; i++) {
-    let randomIdx: number = Math.floor(Math.random() * sourceArray.length);
-    randomizedWords.push(sourceArray[randomIdx]);
-    sourceArray = sourceArray.filter((_, i) => i !== randomIdx);
-  }
-  return randomizedWords;
-}
 
 const Lesson: NextPageWithLayout = () => {
   const [lessonVolume, setLessonVolume] = useState<number>(0);
-  const [currWord, setCurrWord] = useState<number>(initialWordIdx);
-  const [currVocabWords, setCurrVocabWords] = useState<WordLocal[]>([]);
+  const [curWord, setCurWord] = useState<number>(initialWordIdx);
+  const [curVocabWords, setCurVocabWords] = useState<WordLocal[]>([]);
   const [lessonWords, setLessonWords] = useState<WordLocal[]>([]);
   const [answer, setAnswer] = useState<string>('');
   const [allAnswers, setAllAnswers] = useState<Answer[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isUpperCase, setIsUpperCase] = useState(false);
   const preferenceStore = usePreferencesStore(state => state);
-  const [currVocab, setCurrVocab] = useState<VocabLocal>();
+  const [curVocab, setCurVocab] = useState<VocabLocal>();
   const { vocabs } = useVocabStore(state => state);
   const { words, updateProgress } = useWordStore(state => state);
   const router = useRouter();
   const [playClick] = useSound(clickSound, { volume: SOUND_VOLUME });
   const inputRef = useRef<HTMLInputElement>(null);
-  
-  // useEffect(() => {
-  //   console.log(typeof window === "undefined");
-  // }, []);
 
   function submitAnswer(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -58,7 +45,7 @@ const Lesson: NextPageWithLayout = () => {
   }
 
   function registerAnswer() {
-    const i = currWord - 1;
+    const i = curWord - 1;
     const userAnswer: Answer = {
       _id: lessonWords[i]._id,
       word: lessonWords[i].word,
@@ -66,16 +53,16 @@ const Lesson: NextPageWithLayout = () => {
       userAnswer: answer.trim()
     };
     setAllAnswers((prevAnswers) => [...prevAnswers, userAnswer]);
-    setCurrWord(currWord + 1);
+    setCurWord(curWord + 1);
     setAnswer('');
   }
 
   function restartLesson() {
-    setCurrWord(1);
+    setCurWord(1);
     setAllAnswers([]);
     const vocabExists = vocabs.some(v => v._id === router.query.id);
     if (vocabExists) {
-      const wordsForLesson: WordLocal[] = randomizeWords(currVocabWords, lessonVolume);
+      const wordsForLesson: WordLocal[] = randomizeWords(curVocabWords, lessonVolume);
       setLessonWords(wordsForLesson);
     }
   }
@@ -95,21 +82,27 @@ const Lesson: NextPageWithLayout = () => {
     inputRef.current && inputRef.current.focus();
   }
 
-  // get all vocab words by default
-  useEffect(() => {
+  function getVocabWords() {
     setIsLoading(true);
     const existingVocab = vocabs.find(v => v._id === router.query.id);
     if (existingVocab) {
-      setCurrVocab(existingVocab);
+      setCurVocab(existingVocab);
       const vocabStorageWords: WordLocal[] = [];
       existingVocab.wordIds.map(wordId => {
         if (words[wordId]) {
           vocabStorageWords.push(words[wordId]);
         }
       });
-      setCurrVocabWords(vocabStorageWords);
+      setCurVocabWords(vocabStorageWords);
+    } else {
+      alert("Vocabulary doesn't exist");
     }
     setIsLoading(false);
+  }
+
+  // get all vocab words by default
+  useEffect(() => {
+    getVocabWords();
   }, [router]);
 
   useEffect(() => {
@@ -121,7 +114,7 @@ const Lesson: NextPageWithLayout = () => {
   useEffect(() => {
     const existingVocab = vocabs.find(v => v._id === router.query.id);
     if (existingVocab && existingVocab.wordIds.length > 0 && lessonVolume > 0) {
-      const wordsForLesson: WordLocal[] = randomizeWords(currVocabWords, lessonVolume);
+      const wordsForLesson: WordLocal[] = randomizeWords(curVocabWords, lessonVolume);
       if (lessonVolume > existingVocab.wordIds.length) {
         setLessonVolume(existingVocab.wordIds.length);
         setLessonWords(randomizeWords(wordsForLesson, existingVocab.wordIds.length));
@@ -130,14 +123,14 @@ const Lesson: NextPageWithLayout = () => {
       }
       setIsLoading(false);
     }
-  }, [lessonVolume, router, currVocabWords]);
+  }, [lessonVolume, router, curVocabWords]);
 
   // lesson end
   useEffect(() => {
-    if (currWord !== initialWordIdx && currWord > lessonVolume) {
+    if (curWord !== initialWordIdx && curWord > lessonVolume) {
       updateProgress(allAnswers);
     }
-  }, [router, currWord, lessonVolume]);
+  }, [router, curWord, lessonVolume]);
 
   useEffect(() => {
     // only fetch data if vocab is different from the last one
@@ -153,11 +146,11 @@ const Lesson: NextPageWithLayout = () => {
   }, [isLoading])
 
   // end of lesson
-  if (currWord > lessonVolume) {
+  if (curWord > lessonVolume) {
     return (
       <>
         <Head>
-          <title>Lesson | Vocab-It</title>
+          <title>{pageTitle}</title>
         </Head>
         <div className="w-11/12 lg:w-3/5 mx-auto mb-6">
           <LessonResult allAnswers={allAnswers} words={lessonWords} />
@@ -179,24 +172,25 @@ const Lesson: NextPageWithLayout = () => {
     )
   }
 
+  // lesson flash card
   return (
     <>
       <Head>
-        <title>Lesson | Vocab-It</title>
+        <title>{pageTitle}</title>
       </Head>
       <div className="w-11/12 lg:w-3/5 mx-auto mb-6">
-        <p className="mx-3">{currWord}/{lessonVolume}</p>
+        <p className="mx-3">{curWord}/{lessonVolume}</p>
         <Progress
           className="my-3"
-          value={Math.round(((currWord - 1) / lessonVolume) * 100)}
+          value={Math.round(((curWord - 1) / lessonVolume) * 100)}
           aria-label="progress bar"
         />
         <section className="w-full p-4 sm:p-8 rounded-xl bg-white text-custom-text-light dark:text-custom-text-dark dark:bg-custom-highlight border border-zinc-400 dark:border-zinc-300 shadow-2xl">
           <div>
             <h2 className="text-xl mobile:text-2xl">Word:</h2>
-            {(!isLoading && lessonWords[currWord - 1]) ? (
+            {(!isLoading && lessonWords[curWord - 1]) ? (
               <p className="text-2xl mobile:text-3xl text-center my-3">
-                {lessonWords[currWord - 1].translation}
+                {lessonWords[curWord - 1].translation}
               </p>
             ) : (
               <div className="w-full flex justify-center my-3">
@@ -208,13 +202,13 @@ const Lesson: NextPageWithLayout = () => {
           <div>
             <div className="flex justify-between">
               <h2 className="text-xl mobile:text-2xl">Enter translation:</h2>
-              {(!isLoading && lessonWords[currWord - 1]) ? (
+              {(!isLoading && lessonWords[curWord - 1]) ? (
                 <div className="flex gap-3">
-                  <HintButton word={lessonWords[currWord - 1].word} hintType="letter" />
-                  <HintButton word={lessonWords[currWord - 1].word} hintType="word" />
+                  <HintButton word={lessonWords[curWord - 1].word} hintType="letter" />
+                  <HintButton word={lessonWords[curWord - 1].word} hintType="word" />
                 </div>
               ) : (
-                <Skeleton className="w-[38px] h-[38px] rounded-sm" />
+                <Skeleton className="w-9.5 h-9.5 rounded-sm" />
               )}
             </div>
             <form className="my-3 flex justify-center" onSubmit={submitAnswer}>
@@ -232,7 +226,7 @@ const Lesson: NextPageWithLayout = () => {
             </form>
           </div>
         </section>
-        {(!isLoading && lessonWords[currWord - 1]) && (
+        {(!isLoading && lessonWords[curWord - 1]) && (
           <>
             <div className="flex justify-between mt-5 px-3">
               <EndLessonDialog />
@@ -251,9 +245,9 @@ const Lesson: NextPageWithLayout = () => {
                 OK
               </button>
             </div>
-            {currVocab?.lang && Object.getOwnPropertyNames(specialSymbols).includes(currVocab.lang) && (
+            {curVocab?.lang && Object.getOwnPropertyNames(specialSymbols).includes(curVocab.lang) && (
               <section className="flex justify-center gap-2 flex-wrap mt-3">
-                {currVocab?.lang !== 'default' && (
+                {curVocab?.lang !== 'default' && (
                   <button
                     className="px-3 py-2 bg-gray-300 text-custom-text-light rounded-md shadow-md font-mono text-xl font-semibold transition-all duration-100 ease-in-out hover:bg-gray-400 hover:cursor-pointer"
                     onClick={handleUppercaseToggle}
@@ -262,7 +256,7 @@ const Lesson: NextPageWithLayout = () => {
                     {isUpperCase ? <BsCapslockFill /> : <BsCapslock />}
                   </button>
                 )}
-                {currVocab?.lang && currVocab.lang !== 'default' && specialSymbols[currVocab?.lang].map(k => {
+                {curVocab?.lang && curVocab.lang !== 'default' && specialSymbols[curVocab?.lang].map(k => {
                   return <button
                     key={k}
                     className="px-3 py-2 bg-gray-300 text-custom-text-light rounded-md shadow-md font-mono text-xl font-semibold transition-all duration-100 ease-in-out hover:bg-gray-400 hover:cursor-pointer"

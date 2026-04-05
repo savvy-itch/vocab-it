@@ -55,7 +55,7 @@ export default function ProfileUsernameSection({ checkSingleEdit }: { checkSingl
     return (
       <div>
         <h2 className='text-xl mobile:text-2xl font-bold dark:text-custom-text-dark mb-4'>Username</h2>
-        <Skeleton className="my-3 w-32 h-[38px] sm:w-2/12" />
+        <Skeleton className="my-3 w-32 h-9.5 sm:w-2/12" />
         <div className="h-px w-full dark:bg-main-bg-dark mt-3 mb-5" />
       </div>
     )
@@ -96,7 +96,7 @@ export default function ProfileUsernameSection({ checkSingleEdit }: { checkSingl
         </>
       ) : (
         <div className="flex gap-2 my-3 w-fit justify-between items-center">
-          <p className="text-lg leading-[38px] dark:text-custom-text-dark">
+          <p className="text-lg leading-9.5 dark:text-custom-text-dark">
             {storedUsername}
           </p>
           <button

@@ -41,16 +41,16 @@ const Home: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Vocab-It | self-managed vocabularies</title>
+        <title>Vocab-It | Self-managed vocabularies</title>
       </Head>
       {/* upper screen */}
       <div>
-        <section className="relative w-full h-[100dvh] transition ease-in-out duration-300 z-10"
+        <section className="relative w-full h-dvh transition ease-in-out duration-300 z-10"
           ref={topSectionRef}
           data-testid="top-section"
         >
           <Navbar />
-          <div className="h-[100dvh] sm:w-4/5 mx-auto flex gap-2 justify-center flex-col sm:flex-row sm:justify-between items-center">
+          <div className="h-dvh sm:w-4/5 mx-auto flex gap-2 justify-center flex-col sm:flex-row sm:justify-between items-center">
             <Image 
               src={imgSrc}
               className="max-w-[70%] mobile:max-w-[50%]"
@@ -97,7 +97,7 @@ const Home: NextPageWithLayout = () => {
           <div className="w-full h-[60%] flex flex-col justify-between">
             <div className="w-full md:w-3/4 lg:w-2/4">
               <h2 className="text-2xl mobile:text-3xl md:text-5xl font-bold text-custom-highlight3 mt-7 mb-4 text-center sm:text-left">What is Vocab It?</h2>
-              <p className="text-lg mobile:text-xl sm:text-2xl font-semibold break-words">
+              <p className="text-lg mobile:text-xl sm:text-2xl font-semibold wrap-break-word">
                 <span className={`${atma.className} font-bold`}>Vocab It</span> empowers your language learning without any restrictions, while keeping it user-friendly.</p>
             </div>
             <div className="flex w-full flex-col sm:flex-row justify-between items-center">
@@ -110,7 +110,7 @@ const Home: NextPageWithLayout = () => {
               />
               <div className="w-full sm:w-auto">
                 <h2 className="text-2xl mobile:text-3xl md:text-5xl text-custom-highlight3 font-bold mt-7 mb-4 text-center sm:text-left">How to use it?</h2>
-                <ol className="text-lg mobile:text-xl sm:text-2xl font-semibold break-words list-decimal list-inside">
+                <ol className="text-lg mobile:text-xl sm:text-2xl font-semibold wrap-break-word list-decimal list-inside">
                   <li className="my-2">Create vocabularies</li>
                   <li className="my-2">Add words you want to learn</li>
                   <li className="my-2">Practice at your pace</li>

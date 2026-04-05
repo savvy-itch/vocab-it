@@ -31,7 +31,6 @@ npx npm-check-updates -u
 
 ## Possible features
 The website is fully working, but I plan on gradually adding more features in the future.
-- "Show first letter" button to lessons
 - different types of exercises (find a pair, etc.)
 - allow adding multiple translations
 - graph stats

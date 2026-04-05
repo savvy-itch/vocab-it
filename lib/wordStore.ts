@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { Answer, WordLocal, WordLocalStore } from "./types";
 import { getProgressPercentage } from "./utils";
-import { nanoid } from 'nanoid';
 
 export const useWordStore = create<WordLocalStore>()(
   persist(

@@ -39,7 +39,7 @@ export default function SelectLang({ vocab }: { vocab: VocabLocal}) {
         disabled={isUpdating}
         name="langs"
       >
-        <SelectTrigger className="w-3/4 mobile:w-[180px] bg-white dark:border-custom-highlight dark:bg-main-bg-dark border border-slate-200">
+        <SelectTrigger className="w-3/4 mobile:w-45 bg-white dark:border-custom-highlight dark:bg-main-bg-dark border border-slate-200">
           <SelectValue placeholder="Select a language" />
         </SelectTrigger>
         <SelectContent className="dark:border-custom-highlight dark:bg-main-bg-dark">

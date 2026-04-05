@@ -124,11 +124,18 @@ const Vocabulary: NextPageWithLayout = () => {
         {currVocab && <SelectLang vocab={currVocab} />}
         <div className="my-5 flex justify-between items-center">
           {(currWords.length > 0 && router.query.id) ? (
-            <Link
-              className="text-white rounded-lg py-2 px-3 font-semibold bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg transition-colors"
-              href={`/lesson/${router.query.id}`}>
-              Start Lesson
-            </Link>
+            <div className="flex flex-col gap-4">
+              <Link
+                className="text-white rounded-lg py-2 px-3 font-semibold bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg transition-colors"
+                href={`/lesson/${router.query.id}`}>
+                Start Lesson
+              </Link>
+              <Link
+                className="text-white rounded-lg py-2 px-3 font-semibold bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg transition-colors"
+                href={`/lesson/pairs/${router.query.id}`}>
+                Find a Pair
+              </Link>
+            </div>
           ) : (
             <p
               className="rounded-lg py-2 px-3 font-semibold bg-btn-bg disabled:bg-btn-bg/80 disabled:text-zinc-300 cursor-default transition-colors"
@@ -155,7 +162,7 @@ const Vocabulary: NextPageWithLayout = () => {
             ? <WordListSkeleton />
             : (
               currWords.length > 0 ? (
-                <ScrollArea className="h-[250px] rounded-md border px-2 sm:px-4 py-3">
+                <ScrollArea className="h-62.5 rounded-md border px-2 sm:px-4 py-3">
                   {currWords.map((w, i) => {
                     return (
                       <SingleWord
@@ -169,7 +176,7 @@ const Vocabulary: NextPageWithLayout = () => {
                   })}
                 </ScrollArea>
               ) : (
-                <div className="h-[250px] flex justify-center items-center rounded-md border">
+                <div className="h-62.5 flex justify-center items-center rounded-md border">
                   <p className="text-xl font-bold">No words</p>
                 </div>
               )

@@ -39,53 +39,6 @@ export default function Navbar() {
     setInvalidInputMsg('');
   }
 
-  // useEffect(() => {
-  //   if (isDropdownOpen) {
-  //     setIsFetching(true);
-      // const controller = new AbortController();
-      // const privateFetch = async () => {
-      //   try {
-      //     const res = await fetchWithAuth(`${BASE_URL}/vocabs/getVocabs`, {
-      //       signal: controller.signal,
-      //       credentials: 'include'
-      //     });
-
-      //     if (!res.ok) {
-      //       throw new Error('Failed to fetch vocabs in navbar');
-      //     }
-
-      //     const data = await res.json();
-      //     setVocabs(data.vocabularies);
-      //   } catch (error) {
-      //     console.error(error);
-      //   }
-      // }
-
-      // privateFetch();
-
-      // return () => {
-      //   controller.abort();
-      //   setIsFetching(false);
-      // }
-    // }
-  // }, [isDropdownOpen]);
-
-  // useEffect(() => {
-  //   if (vocabs) {
-  //     setIsFetching(false);
-  //   } else {
-  //     setIsFetching(true);
-  //   }
-  // }, [vocabs]);
-
-  // check if user is logged in, but hasn't visited any protected routes yet
-  // useEffect(() => {
-    // if (!isTokenChecked) {
-    //   setIsFetching(true);
-    //   setIsFetching(false);
-    // }
-  // }, []);
-
   return (
     <nav className="bg-secondary-bg-light dark:bg-secondary-bg-dark py-2 sm:py-5 absolute top-0 left-0 right-0 transition-colors">
       <div className="w-11/12 mobile:w-4/5 mx-auto flex justify-between items-center">
@@ -158,7 +111,7 @@ export default function Navbar() {
                   aria-label="color theme"
                 >
                   <HiSun className="w-8 h-8 fill-white rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                  <HiMoon className="w-8 h-8 fill-white absolute rotate-90 scale-0 transition-all dark:-rotate-0 dark:scale-100" />
+                  <HiMoon className="w-8 h-8 fill-white absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                 </MenubarTrigger>
 
                 <MenubarContent className="dark:border-custom-highlight dark:bg-main-bg-dark" align='end'>

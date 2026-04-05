@@ -22,7 +22,7 @@ export default function VocabList() {
             Words
           </p>
         </div>
-        <ScrollArea className="h-[210px] rounded-md border px-2 sm:px-4 py-3">
+        <ScrollArea className="h-52.5 rounded-md border px-2 sm:px-4 py-3">
           {vocabs.map((vocab: VocabLocal) => {
             return <VocabListRow key={vocab._id} vocab={vocab} />
           })}
@@ -39,7 +39,7 @@ export default function VocabList() {
           Words
         </p>
       </div>
-      <div className="h-[210px] rounded-md border sm:px-4 py-3 flex justify-center items-center">
+      <div className="h-52.5 rounded-md border sm:px-4 py-3 flex justify-center items-center">
         <p className="text-base sm:text-xl font-bold">No vocabularies</p>
       </div>
     </section>
