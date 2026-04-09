@@ -55,11 +55,11 @@ export const useWordStore = create<WordLocalStore>()(
       updateProgress: (answers: Answer[]) => {
         const updatedWords = {... get().words};
         answers.forEach(a => {
-          const currWord = updatedWords[a._id];
-          if (currWord) {
-            const isGuessCorrect = currWord.word === a.userAnswer;
-            currWord.progress = getProgressPercentage(currWord.progress, currWord.trained, isGuessCorrect);
-            currWord.trained++;
+          const curWord = updatedWords[a._id];
+          if (curWord) {
+            const isGuessCorrect = curWord.word === a.userAnswer;
+            curWord.progress = getProgressPercentage(curWord.progress, curWord.trained, isGuessCorrect);
+            curWord.trained++;
           }
         });
         set({ words: updatedWords });

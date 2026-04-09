@@ -28,7 +28,7 @@ const Lesson: NextPageWithLayout = () => {
   const [lessonWords, setLessonWords] = useState<WordLocal[]>([]);
   const [answer, setAnswer] = useState<string>('');
   const [allAnswers, setAllAnswers] = useState<Answer[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isUpperCase, setIsUpperCase] = useState(false);
   const preferenceStore = usePreferencesStore(state => state);
   const [curVocab, setCurVocab] = useState<VocabLocal>();
@@ -97,13 +97,14 @@ const Lesson: NextPageWithLayout = () => {
     } else {
       alert("Vocabulary doesn't exist");
     }
-    setIsLoading(false);
   }
 
   // get all vocab words by default
   useEffect(() => {
-    getVocabWords();
-  }, [router]);
+    if (router.isReady) {
+      getVocabWords();
+    }
+  }, [router.isReady]);
 
   useEffect(() => {
     if (preferenceStore) {
@@ -153,7 +154,7 @@ const Lesson: NextPageWithLayout = () => {
           <title>{pageTitle}</title>
         </Head>
         <div className="w-11/12 lg:w-3/5 mx-auto mb-6">
-          <LessonResult allAnswers={allAnswers} words={lessonWords} />
+          <LessonResult allAnswers={allAnswers} wordsLen={lessonWords.length} />
           <div className="flex justify-between mt-5 px-3">
             <button
               className="flex gap-1 items-center rounded-lg p-3 mobile:px-4 text-sm mobile:text-base font-semibold text-white bg-zinc-600 hover:bg-zinc-500 focus:bg-zinc-500 hover:cursor-pointer transition-colors"
