@@ -5,7 +5,7 @@ import Layout from '@/components/Layout';
 import Footer from '@/components/Footer';
 import useProfileStore from '@/lib/profileStore';
 import ProfileAddVocabSection from '@/components/ProfileAddVocabSection';
-import ProfileWordSection from '@/components/ProfileWordSection';
+import ProfileSettingsSection from '@/components/ProfileSettingsSection';
 import { Toaster } from '@/components/ui/toaster';
 import DangerZone from '@/components/DangerZone';
 import ProfileUsernameSection from '@/components/ProfileUsernameSection';
@@ -54,7 +54,7 @@ const Profile: NextPageWithLayout = () => {
         <h1 className='text-2xl mobile:text-3xl md:text-3xl text-center font-semibold dark:text-custom-text-dark mb-4'>Profile</h1>
         <ProfileUsernameSection checkSingleEdit={checkSingleEdit} />
         <ProfileAddVocabSection checkSingleEdit={checkSingleEdit} />
-        <ProfileWordSection checkSingleEdit={checkSingleEdit} />
+        <ProfileSettingsSection checkSingleEdit={checkSingleEdit} />
         <DangerZone />
       </section>
       <Toaster />

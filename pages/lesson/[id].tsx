@@ -41,7 +41,9 @@ const Lesson: NextPageWithLayout = () => {
   function submitAnswer(e: React.SyntheticEvent) {
     e.preventDefault();
     registerAnswer();
-    if (preferenceStore.soundOn) playClick();
+    if (preferenceStore.soundOn) {
+      playClick();
+    }
   }
 
   function registerAnswer() {

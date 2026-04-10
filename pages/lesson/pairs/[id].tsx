@@ -11,6 +11,8 @@ import { useRouter } from 'next/router'
 import { useWordStore } from '@/lib/wordStore'
 import { randomizeWords, shuffleIndeces } from '@/lib/utils'
 import { Skeleton } from '@/components/ui/skeleton'
+import { clickSound, errorSound, SOUND_VOLUME, successSound } from '@/lib/globals'
+import useSound from 'use-sound'
 
 type PressedBtns = {
   word: string | null,
@@ -31,12 +33,16 @@ const PairsLesson: NextPageWithLayout = () => {
   const [curCardTranslationIdxs, setCurCardTranslationIdxs] = useState<number[]>([]);
   const [pressedBtns, setPressedBtns] = useState<PressedBtns>({ word: null, translation: null });
   const [hiddenPairs, setHiddenPairs] = useState<Set<string>>(new Set());
-  const [rounds, setRounds] = useState<number>(defRounds);
+  const [curRounds, setCurRounds] = useState<number>(defRounds);
   const [wordsPerCard, setWordsPerCard] = useState<number>(defWordsPerCard);
   const [allAnswers, setAllAnswers] = useState<Answer[]>([]);
+  const [playError] = useSound(errorSound, { volume: SOUND_VOLUME });
+  const [playSuccess] = useSound(successSound, { volume: SOUND_VOLUME });
+  const [playClick] = useSound(clickSound, { volume: SOUND_VOLUME });
 
   const { vocabs } = useVocabStore(state => state);
   const { words, updateProgress } = useWordStore(state => state);
+  const { rounds, soundOn } = usePreferencesStore(state => state);
 
   const router = useRouter();
 
@@ -63,6 +69,9 @@ const PairsLesson: NextPageWithLayout = () => {
     if (isTranslation) {
       if (!pressedBtns.word) {
         // pressing the same button again
+        if (soundOn) {
+          playClick();
+        }
         if (pressedBtns.translation === id) {
           setPressedBtns({ word: null, translation: null });
         } else {
@@ -71,21 +80,28 @@ const PairsLesson: NextPageWithLayout = () => {
         }
       } else if (pressedBtns?.word === id) {
         // correct guess
+        if (soundOn) {
+          playSuccess();
+        }
         setHiddenPairs(prev => new Set(prev).add(id));
-        console.log({ line: 75, id, word, translation, userAnswer: word });
         registerAnswer(id, word, translation, word);
         setPressedBtns({ word: null, translation: null });
       } else {
         // wrong guess
+        if (soundOn) {
+          playError();
+        }
         if (pressedBtns.word) {
           const w = lessonWords.find(w => w._id === pressedBtns.word);
-          console.log({ line: 82, id: pressedBtns.word, word: w?.word, translation: w?.translation, userAnswer: w?.word });
           w && registerAnswer(pressedBtns.word, w.word, w.translation, w.word);
         }
         setPressedBtns({ word: null, translation: null });
       }
     } else {
       if (!pressedBtns.translation) {
+        if (soundOn) {
+          playClick();
+        }
         // pressing the same button again
         if (pressedBtns.word === id) {
           setPressedBtns({ word: null, translation: null });
@@ -95,15 +111,19 @@ const PairsLesson: NextPageWithLayout = () => {
         }
       } else if (pressedBtns?.translation === id) {
         // correct guess
+        if (soundOn) {
+          playSuccess();
+        }
         setHiddenPairs(prev => new Set(prev).add(id));
-        console.log({ line: 99, id, word, translation, userAnswer: word });
         registerAnswer(id, word, translation, word);
         setPressedBtns({ word: null, translation: null });
       } else {
         // wrong guess
+        if (soundOn) {
+          playError();
+        }
         if (pressedBtns.translation) {
           const w = lessonWords.find(w => w._id === pressedBtns.translation);
-          console.log({ line: 107, id: pressedBtns.translation, word: w?.word, translation: w?.translation, userAnswer: w?.word });
           w && registerAnswer(pressedBtns.translation, w.word, w.translation, w.word);
         }
         setPressedBtns({ word: null, translation: null });
@@ -130,18 +150,18 @@ const PairsLesson: NextPageWithLayout = () => {
 
   useEffect(() => {
     if (curVocab && curVocab.wordIds.length > 0) {
-      const vol = rounds * wordsPerCard;
+      const vol = curRounds * wordsPerCard;
       const wordsTotal = curVocab.wordIds.length;
       const trueVol = Math.min(vol, wordsTotal);
       setLessonVolume(trueVol);
       setLessonWords(randomizeWords(allVocabWords, trueVol));
 
       const trueRounds = Math.ceil(trueVol / wordsPerCard);
-      if (trueRounds < rounds) {
-        setRounds(trueRounds);
+      if (trueRounds < curRounds) {
+        setCurRounds(trueRounds);
       }
     }
-  }, [lessonVolume, allVocabWords, wordsPerCard, rounds, curVocab]);
+  }, [lessonVolume, allVocabWords, wordsPerCard, curRounds, curVocab]);
 
   useEffect(() => {
     if (lessonWords.length > 0) {
@@ -167,7 +187,7 @@ const PairsLesson: NextPageWithLayout = () => {
 
   useEffect(() => {
     // end of lesson
-    if ((curCardCount + 1) === rounds && hiddenPairs.size === wordsPerCard) {
+    if ((curCardCount + 1) === curRounds && hiddenPairs.size === wordsPerCard) {
       updateProgress(allAnswers);
       router.push(`/vocabularies/${router.query.id}`);
     } else if (hiddenPairs.size === wordsPerCard) {
@@ -178,16 +198,22 @@ const PairsLesson: NextPageWithLayout = () => {
     }
   }, [hiddenPairs]);
 
+  useEffect(() => {
+    if (rounds) {
+      setCurRounds(rounds);
+    }
+  }, [rounds]);
+
   return (
     <>
       <Head>
         <title>Find a Pair | Vocab-It</title>
       </Head>
       <div className="w-11/12 lg:w-3/5 mx-auto mb-6">
-        <p className="mx-3">{curCardCount+1}/{rounds}</p>
+        <p className="mx-3">{curCardCount+1}/{curRounds}</p>
         <Progress
           className="my-3"
-          value={curCardCount/rounds * 100}
+          value={curCardCount/curRounds * 100}
           aria-label="progress bar"
         />
         <section className="w-full p-4 sm:p-8 rounded-xl bg-white text-custom-text-light dark:text-custom-text-dark dark:bg-custom-highlight border border-zinc-400 dark:border-zinc-300 shadow-2xl">
