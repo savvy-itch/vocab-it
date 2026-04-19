@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckSingleEditFunction, WordLocal } from '@/lib/types';
+import { CheckSingleEditFunction } from '@/lib/types';
 import { SOUND_VOLUME, errorSound } from '@/lib/globals';
 import useSound from 'use-sound';
 import { usePreferencesStore } from '@/lib/preferencesStore';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { HiMiniLightBulb } from "react-icons/hi2";
 import { RxLetterCaseCapitalize } from "react-icons/rx";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -15,7 +13,7 @@ export default function HintButton({ word, hintType }: HintProps) {
   return (
     <Popover>
       <PopoverTrigger
-        className="flex items-center justify-center p-2 border dark:border-white rounded-sm"
+        className="flex items-center justify-center p-2 border dark:border-white rounded-sm hover:cursor-pointer"
         aria-label="hint button"
         title={hintType === 'letter' ? "Show first letter" : "Show translation"}
       >

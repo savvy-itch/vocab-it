@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { atma } from '../lib/globals';
 import { useTheme } from 'next-themes';
 import { VocabLocal } from '@/lib/types';
@@ -18,7 +18,6 @@ import Link from 'next/link';
 import NewVocabDialog from './NewVocabDialog';
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { Skeleton } from './ui/skeleton';
-import { useRouter } from 'next/router';
 import { useVocabStore } from '@/lib/vocabStore';
 
 const SoundToggleNoSSR = dynamic(() => import('./SoundToggle'), {
@@ -27,12 +26,10 @@ const SoundToggleNoSSR = dynamic(() => import('./SoundToggle'), {
 
 export default function Navbar() {
   const { vocabs } = useVocabStore(state => state);
-  const [isFetching, setIsFetching] = useState<boolean>(false);
   const [vocabTitle, setVocabTitle] = useState<string>("");
   const [invalidInputMsg, setInvalidInputMsg] = useState<string>('');
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const { setTheme } = useTheme();
-  const router = useRouter();
 
   function resetDialogInput() {
     setVocabTitle('');
@@ -65,12 +62,7 @@ export default function Navbar() {
                   <HiGlobeAlt className="w-8 h-8 text-white" />
                 </MenubarTrigger>
                 <MenubarContent className="dark:border-custom-highlight dark:bg-main-bg-dark" align='end'>
-                  {isFetching ? (
-                    <MenubarItem className="hover:cursor-pointer text-custom-text-light dark:text-white dark:hover:bg-custom-highlight" aria-label="menuitem">
-                      <HiFolder className="mr-2" /> LOADING...
-                    </MenubarItem>
-                  ) : (
-                    vocabs?.map((v: VocabLocal) => {
+                  {vocabs?.map((v: VocabLocal) => {
                       return (
                         <MenubarItem aria-label="menuitem" key={v._id} className="hover:cursor-pointer text-custom-text-light dark:text-white dark:hover:bg-custom-highlight">
                           <Link href={`/vocabularies/${encodeURIComponent(v._id)}`} className="flex items-center w-full">
@@ -78,7 +70,7 @@ export default function Navbar() {
                           </Link>
                         </MenubarItem>)
                     })
-                  )}
+                  }
                   <MenubarSeparator className="dark:bg-custom-highlight" />
                   <MenubarItem aria-label="menuitem" className="hover:cursor-pointer text-custom-text-light dark:text-white dark:hover:bg-custom-highlight">
                     <DialogTrigger className="flex items-center"

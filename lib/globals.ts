@@ -1,6 +1,6 @@
 import localFont from 'next/font/local';
 
-const INITIAL_NUMBER: number = 3;
+const INITIAL_AMOUNT: number = 3;
 const MAX_WORDS = 100;
 const SOUND_VOLUME = 0.25;
 
@@ -25,7 +25,7 @@ const specialSymbols = {
 }
 
 export {
-  INITIAL_NUMBER, 
+  INITIAL_AMOUNT, 
   MAX_WORDS,
   SOUND_VOLUME,
   USERNAME_MIN_LENGTH,

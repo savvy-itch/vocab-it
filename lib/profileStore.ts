@@ -14,7 +14,8 @@ interface ProfileSlice {
   toggleIsAddWord: () => void,
   toggleIsEditWord: () => void,
   toggleIsEditVocabTitle: () => void,
-  toggleIsEditRoundsAmount: () => void
+  toggleIsEditRoundsAmount: () => void,
+  resetEditModes: () => void,
 }
 
 const useProfileStore = create<ProfileSlice>()(set => ({
@@ -31,7 +32,14 @@ const useProfileStore = create<ProfileSlice>()(set => ({
   toggleIsAddWord: () => set(state => ({ isAddWord: !state.isAddWord })),
   toggleIsEditWord: () => set(state => ({ isEditWord: !state.isEditWord })),
   toggleIsEditVocabTitle: () => set(state => ({ isEditVocabTitle: !state.isEditVocabTitle })),
-  toggleIsEditRoundsAmount: () => set(state => ({ isEditRoundsAmount: !state.isEditRoundsAmount }))
+  toggleIsEditRoundsAmount: () => set(state => ({ isEditRoundsAmount: !state.isEditRoundsAmount })),
+  resetEditModes: () => set(() => ({
+    isEditUsername: false,
+    isEditWordAmount: false,
+    isAddVocab: false,
+    isEditVocabTitle: false,
+    isEditRoundsAmount: false,
+  }))
 }));
 
 export default useProfileStore;

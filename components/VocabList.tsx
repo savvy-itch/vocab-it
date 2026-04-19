@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { VocabLocal } from '@/lib/types';
 import VocabListRow from './VocabListRow';
 import { ScrollArea } from './ui/scroll-area';
@@ -6,8 +6,14 @@ import VocabListSkeleton from './skeletons/VocabListSkeleton';
 import { useVocabStore } from '@/lib/vocabStore';
 
 export default function VocabList() {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const vocabs = useVocabStore(state => state.vocabs);
+
+  useEffect(() => {
+    if (vocabs) {
+      setIsLoading(false);
+    }
+  }, [vocabs]);
 
   if (isLoading) {
     return <VocabListSkeleton />;

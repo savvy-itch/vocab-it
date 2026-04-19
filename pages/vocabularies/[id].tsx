@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { VocabLocal, WordLocal } from '@/lib/types';
 import useProfileStore from '@/lib/profileStore';
@@ -20,6 +20,8 @@ import WordListSkeleton from '@/components/skeletons/WordListSkeleton';
 import SelectLang from '@/components/SelectLang';
 import { useVocabStore } from '@/lib/vocabStore';
 import { useWordStore } from '@/lib/wordStore';
+import { FaShuffle } from "react-icons/fa6";
+import { MdOutlineTranslate } from "react-icons/md";
 
 const Vocabulary: NextPageWithLayout = () => {
   const router = useRouter();
@@ -28,18 +30,10 @@ const Vocabulary: NextPageWithLayout = () => {
   const { words } = useWordStore(state => state);
   const [currWords, setCurrWords] = useState<WordLocal[]>([]);
   const {
-    isEditUsername,
-    isEditWordAmount,
-    isAddVocab,
     isAddWord,
     isEditWord,
     isEditVocabTitle,
-    toggleIsEditUsername,
-    toggleIsEditWordAmount,
-    toggleIsAddVocab,
-    toggleIsAddWord,
-    toggleIsEditWord,
-    toggleIsEditVocabTitle
+    resetEditModes
   } = useProfileStore(state => state);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -74,22 +68,8 @@ const Vocabulary: NextPageWithLayout = () => {
   }, [router, words, vocabs]);
 
   useEffect(() => {
-    // reset all active edit modes 
-    switch (true) {
-      case isEditUsername:
-        toggleIsEditUsername();
-      case isEditWordAmount:
-        toggleIsEditWordAmount();
-      case isAddVocab:
-        toggleIsAddVocab();
-      case isAddWord:
-        toggleIsAddWord();
-      case isEditWord:
-        toggleIsEditWord();
-      case isEditVocabTitle:
-        toggleIsEditVocabTitle();
-    }
-  }, []);
+    resetEditModes();
+  }, [resetEditModes]);
 
   return (
     <>
@@ -121,27 +101,34 @@ const Vocabulary: NextPageWithLayout = () => {
           </p>
         </div>
         <p className="mobile:text-lg mx-auto m">Correctness rate: <span className="font-bold">{calcWordsProgress()}%</span></p>
-        {currVocab && <SelectLang vocab={currVocab} />}
+        {currVocab && <SelectLang vocabLang={currVocab.lang} vocabId={currVocab._id} />}
         <div className="my-5 flex justify-between items-center">
           {(currWords.length > 0 && router.query.id) ? (
             <div className="flex flex-col gap-4">
               <Link
-                className="text-white rounded-lg py-2 px-3 font-semibold bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg transition-colors"
+                className="text-white rounded-lg py-2 px-3 flex gap-1 items-center font-semibold bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg hover:scale-105 transition-all"
                 href={`/lesson/${router.query.id}`}>
-                Start Lesson
+                  <MdOutlineTranslate /> <span>Flash Cards</span>
               </Link>
               <Link
-                className="text-white rounded-lg py-2 px-3 font-semibold bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg transition-colors"
+                className="text-white rounded-lg py-2 px-3 flex gap-1 items-center font-semibold bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg hover:scale-105 transition-all"
                 href={`/lesson/pairs/${router.query.id}`}>
-                Find a Pair
+                  <FaShuffle /> <span>Find a Pair</span>
               </Link>
             </div>
           ) : (
-            <p
-              className="rounded-lg py-2 px-3 font-semibold bg-btn-bg disabled:bg-btn-bg/80 disabled:text-zinc-300 cursor-default transition-colors"
-            >
-              Start Lesson
-            </p>
+            <>
+              <p
+                className="rounded-lg py-2 px-3 font-semibold bg-btn-bg disabled:bg-btn-bg/80 disabled:text-zinc-300 cursor-default transition-colors"
+              >
+                Start Lesson
+              </p>
+              <p
+                className="rounded-lg py-2 px-3 font-semibold bg-btn-bg disabled:bg-btn-bg/80 disabled:text-zinc-300 cursor-default transition-colors"
+              >
+                Find a Pair
+              </p>
+            </>
           )}
           <div className="flex flex-col gap-4">
             {currVocab && (

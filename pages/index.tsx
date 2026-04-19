@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef, useState } from 'react'
+import { ReactElement, useEffect, useRef, useState } from 'react'
 import { useTheme } from 'next-themes';
 import { atma } from '@/lib/globals';
 import { NextPageWithLayout } from './_app';

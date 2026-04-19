@@ -1,4 +1,3 @@
-import React from 'react'
 import { usePreferencesStore } from '@/lib/preferencesStore';
 import useSound from 'use-sound';
 import { SOUND_VOLUME, muteSound, unmuteSound } from '@/lib/globals';

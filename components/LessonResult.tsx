@@ -1,4 +1,4 @@
-import { Answer, WordLocal } from '@/lib/types';
+import { Answer } from '@/lib/types';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import {

@@ -5,7 +5,6 @@ import { usePreferencesStore } from '@/lib/preferencesStore';
 import { useToast } from './ui/use-toast';
 import useSound from 'use-sound';
 import { SOUND_VOLUME, errorSound, successSound } from '@/lib/globals';
-import { Button } from '@/components/ui/button';
 import { HiPencilSquare } from "react-icons/hi2";
 
 const MAX_WORDS = 200;
@@ -24,7 +23,7 @@ export default function ProfileSettingsSection({ checkSingleEdit }: { checkSingl
     isEditWordAmount,
     isEditRoundsAmount,
     toggleIsEditWordAmount,
-    toggleIsEditRoundsAmount
+    toggleIsEditRoundsAmount,
   } = useProfileStore(state => state);
   const [errorMsg, setErrorMsg] = useState<string>('');
   const { toast } = useToast();
@@ -100,13 +99,16 @@ export default function ProfileSettingsSection({ checkSingleEdit }: { checkSingl
   }
 
   useEffect(() => {
-    if (lessonVolume) {
+    if (lessonVolume && wordsPerLesson === 0) {
       setWordsPerLesson(lessonVolume);
     }
-    if (rounds) {
+  }, [lessonVolume, wordsPerLesson]);
+
+  useEffect(() => {
+    if (rounds && roundsPerLesson === 0) {
       setRoundsPerLesson(rounds);
     }
-  }, [lessonVolume, rounds]);
+  }, [rounds, roundsPerLesson]);
 
   return (
     <article>
@@ -127,12 +129,18 @@ export default function ProfileSettingsSection({ checkSingleEdit }: { checkSingl
               required
               autoFocus
             />
-            <Button
-              className="bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:bg-gray-600 text-white dark:text-white hover:cursor-pointer"
+            <button
+              className="rounded-full bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:bg-gray-600 text-white dark:text-white hover:cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm"
               onSubmit={updateWordsAmount}
             >
               Update
-            </Button>
+            </button>
+            <button
+              className="rounded-full mobile:bg-secondary-bg-light mobile:hover:bg-secondary-bg-light/80 text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm"
+              onClick={toggleIsEditWordAmount}
+            >
+              Cancel
+            </button>
           </div>
           {errorMsg.length > 0 ? (
             <p className="text-xs italic mt-2">Enter a number between 1 and {MAX_WORDS}</p>
@@ -171,12 +179,18 @@ export default function ProfileSettingsSection({ checkSingleEdit }: { checkSingl
               required
               autoFocus
             />
-            <Button
-              className="bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:bg-gray-600 text-white dark:text-white hover:cursor-pointer"
+            <button
+              className="rounded-full bg-gray-500 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:bg-gray-600 text-white dark:text-white hover:cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm"
               onSubmit={updateRoundsAmount}
             >
               Update
-            </Button>
+            </button>
+            <button
+              className="rounded-full mobile:bg-secondary-bg-light mobile:hover:bg-secondary-bg-light/80 text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm"
+              onClick={toggleIsEditRoundsAmount}
+            >
+              Cancel
+            </button>
           </div>
           {errorMsg.length > 0 ? (
             <p className="text-xs italic mt-2">Enter a number between 1 and {MAX_ROUNDS}</p>

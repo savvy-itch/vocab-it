@@ -16,21 +16,27 @@ export function getProgressPercentage(prev: number, trained: number, isCorrect: 
 
 /* retrieves a random selection of words */
 export function randomizeWords(arr: WordLocal[], vol: number): WordLocal[] {
-  let randomizedWords: WordLocal[] = [];
-  let sourceArr: WordLocal[] = arr;
-  for (let i = 0; i < vol; i++) {
-    let randomIdx: number = Math.floor(Math.random() * sourceArr.length);
-    randomizedWords.push(sourceArr[randomIdx]);
-    sourceArr = sourceArr.filter((_, i) => i !== randomIdx);
+  let randomizedWords: WordLocal[] = [... arr];
+  let i = randomizedWords.length - 1;
+
+  // Fisher–Yates shuffle
+  while(i > 0) {
+		const n = Math.floor(Math.random() * (i+1));
+    const tmp = randomizedWords[n];
+   	randomizedWords[n] = randomizedWords[i];
+    randomizedWords[i] = tmp;
+    i--;
   }
-  return randomizedWords;
+
+  return randomizedWords.slice(0, vol);
 }
 
-/* shuffles given array of ints using Fisher–Yates shuffle */
-export function shuffleIndeces(arr: number[]): number[] {
+/* shuffles given array of ints */
+export function shuffleIndices(arr: number[]): number[] {
   const shuffledArr = [...arr];
   let i = arr.length - 1;
   
+  // Fisher–Yates shuffle
   while(i > 0) {
 		const n = Math.floor(Math.random() * (i+1));
     const tmp = shuffledArr[n];

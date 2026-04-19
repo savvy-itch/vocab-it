@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,7 +14,7 @@ import { useVocabStore } from '@/lib/vocabStore';
 import { useWordStore } from '@/lib/wordStore';
 
 export default function DeleteWordsBtn({ id, wordsExist }: { id: string, wordsExist: boolean }) {
-  const { vocabs, deleteAllWordsId } = useVocabStore(state => state);
+  const { deleteAllWordsId } = useVocabStore(state => state);
   const { deleteAllVocabWords } = useWordStore(state => state);
 
   function deleteVocabFromStorage() {

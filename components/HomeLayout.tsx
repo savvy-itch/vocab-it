@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { ThemeProvider } from "@/components/theme-provider";
 import Head from 'next/head';
 import { arialRounded } from '../lib/globals';

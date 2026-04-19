@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import React from 'react';
 import { HiOutlineExternalLink } from "react-icons/hi";
 
 export default function Footer() {
@@ -29,7 +28,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link className="flex items-center gap-1 hover:text-white focus:text-white transition-colors" href="https://www.linkedin.com/in/михайло-савич-a31366248/">
+              <Link className="flex items-center gap-1 hover:text-white focus:text-white transition-colors" href="www.linkedin.com/in/mykhailo-savych-a31366248">
                 LinkedIn <HiOutlineExternalLink />
               </Link>
             </li>

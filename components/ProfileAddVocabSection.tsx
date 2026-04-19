@@ -91,7 +91,7 @@ export default function ProfileAddVocabSection({checkSingleEdit}: {checkSingleEd
               <HiCheckCircle className="inline mobile:hidden text-btn-bg hover:text-hover-btn-bg focus:text-hover-btn-bg h-9 w-9" /> 
             </button>
             <button 
-              className={`rounded-full bg-white mobile:bg-secondary-bg-light mobile:hover:bg-secondary-bg-light/80 mobile:focus:bg-secondary-bg-light/80 mobile:text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm`}
+              className="rounded-full bg-white mobile:bg-secondary-bg-light mobile:hover:bg-secondary-bg-light/80 mobile:focus:bg-secondary-bg-light/80 mobile:text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm"
               aria-label="cancel" 
               onClick={cancelAddVocab}
             >

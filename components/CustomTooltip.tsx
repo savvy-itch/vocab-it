@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Popover,
   PopoverContent,
@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/tooltip";
 import { HiMiniQuestionMarkCircle } from "react-icons/hi2";
 
-export default function CustomTooltip({text}: {text: string}) {
-  const [isTouchScreen, setIsTouchScreen]= useState<boolean>(false);
+export default function CustomTooltip({ text }: { text: string }) {
+  const [isTouchScreen, setIsTouchScreen] = useState<boolean>(false);
 
   useEffect(() => {
     const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;

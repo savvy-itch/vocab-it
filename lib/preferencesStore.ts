@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { INITIAL_AMOUNT } from "./globals";
 
-const INITIAL_AMOUNT: number = 3;
 const DEFAULT_ROUNDS: number = 5;
 
 interface PreferenceStore {

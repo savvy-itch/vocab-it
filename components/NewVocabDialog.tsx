@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from './ui/button';
 import useDisplayPopup from '@/hooks/useDisplayPopup';
 import { useVocabStore } from '@/lib/vocabStore';
 
@@ -69,7 +68,7 @@ export default function NewVocabDialog({ vocabTitle, setVocabTitle, invalidInput
         <p className="text-xs font-bold text-red-800">{invalidInputMsg}</p>
       </div>
       <DialogFooter>
-        <Button type="button" onClick={createVocab}>Create</Button>
+        <button className="flex gap-1 items-center rounded-lg py-2 px-3 mobile:px-4 text-sm mobile:text-base font-semibold text-white dark:bg-zinc-700 bg-zinc-600 dark:hover:bg-zinc-600 hover:bg-zinc-500 dark:focus:bg-zinc-600 focus:bg-zinc-500 hover:cursor-pointer transition-colors" onClick={createVocab}>Create</button>
       </DialogFooter>
     </DialogContent>
   )

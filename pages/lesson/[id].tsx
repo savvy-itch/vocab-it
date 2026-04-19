@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Answer, WordLocal, VocabLocal } from '@/lib/types';
 import { usePreferencesStore } from '@/lib/preferencesStore';
 import useSound from 'use-sound';
-import { SOUND_VOLUME, clickSound, specialSymbols } from '@/lib/globals';
+import { INITIAL_AMOUNT, SOUND_VOLUME, clickSound, specialSymbols } from '@/lib/globals';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -22,21 +22,21 @@ const pageTitle = "Lesson | Vocab-It";
 const initialWordIdx: number = 1;
 
 const Lesson: NextPageWithLayout = () => {
-  const [lessonVolume, setLessonVolume] = useState<number>(0);
-  const [curWord, setCurWord] = useState<number>(initialWordIdx);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [curVocab, setCurVocab] = useState<VocabLocal>();
   const [curVocabWords, setCurVocabWords] = useState<WordLocal[]>([]);
   const [lessonWords, setLessonWords] = useState<WordLocal[]>([]);
+  const [curWord, setCurWord] = useState<number>(initialWordIdx);
   const [answer, setAnswer] = useState<string>('');
   const [allAnswers, setAllAnswers] = useState<Answer[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isUpperCase, setIsUpperCase] = useState(false);
-  const preferenceStore = usePreferencesStore(state => state);
-  const [curVocab, setCurVocab] = useState<VocabLocal>();
+  const [isUpperCase, setIsUpperCase] = useState<boolean>(false);
+
   const { vocabs } = useVocabStore(state => state);
+  const preferenceStore = usePreferencesStore(state => state);
   const { words, updateProgress } = useWordStore(state => state);
-  const router = useRouter();
   const [playClick] = useSound(clickSound, { volume: SOUND_VOLUME });
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   function submitAnswer(e: React.SyntheticEvent) {
     e.preventDefault();
@@ -54,8 +54,14 @@ const Lesson: NextPageWithLayout = () => {
       translation: lessonWords[i].translation,
       userAnswer: answer.trim()
     };
-    setAllAnswers((prevAnswers) => [...prevAnswers, userAnswer]);
-    setCurWord(curWord + 1);
+    const updatedAnswers: Answer[] = [...allAnswers, userAnswer];
+    const updatedWord = curWord + 1;
+    // if end of the lesson
+    if (updatedWord !== initialWordIdx && updatedWord > lessonVolume) {
+      updateProgress(updatedAnswers);
+    }
+    setAllAnswers(updatedAnswers);
+    setCurWord(updatedWord);
     setAnswer('');
   }
 
@@ -84,63 +90,37 @@ const Lesson: NextPageWithLayout = () => {
     inputRef.current && inputRef.current.focus();
   }
 
-  function getVocabWords() {
-    setIsLoading(true);
-    const existingVocab = vocabs.find(v => v._id === router.query.id);
-    if (existingVocab) {
-      setCurVocab(existingVocab);
-      const vocabStorageWords: WordLocal[] = [];
-      existingVocab.wordIds.map(wordId => {
-        if (words[wordId]) {
-          vocabStorageWords.push(words[wordId]);
-        }
-      });
-      setCurVocabWords(vocabStorageWords);
-    } else {
-      alert("Vocabulary doesn't exist");
-    }
-  }
-
   // get all vocab words by default
   useEffect(() => {
     if (router.isReady) {
-      getVocabWords();
-    }
-  }, [router.isReady]);
-
-  useEffect(() => {
-    if (preferenceStore) {
-      setLessonVolume(preferenceStore.lessonVolume);
-    }
-  }, [preferenceStore]);
-
-  useEffect(() => {
-    const existingVocab = vocabs.find(v => v._id === router.query.id);
-    if (existingVocab && existingVocab.wordIds.length > 0 && lessonVolume > 0) {
-      const wordsForLesson: WordLocal[] = randomizeWords(curVocabWords, lessonVolume);
-      if (lessonVolume > existingVocab.wordIds.length) {
-        setLessonVolume(existingVocab.wordIds.length);
-        setLessonWords(randomizeWords(wordsForLesson, existingVocab.wordIds.length));
-      } else {
-        setLessonWords(randomizeWords(wordsForLesson, lessonVolume));
+      setIsLoading(true);
+      if (router.query.id) {
+        const existingVocab = vocabs.find(v => v._id === router.query.id);
+        if (existingVocab) {
+          setCurVocab(existingVocab);
+          const vocabStorageWords: WordLocal[] = [];
+          existingVocab.wordIds.map(wordId => {
+            if (words[wordId]) {
+              vocabStorageWords.push(words[wordId]);
+            }
+          });
+          setCurVocabWords(vocabStorageWords);
+        } else {
+          alert("Vocabulary doesn't exist");
+        }
       }
+    }
+  }, [router.isReady, router.query.id, vocabs, words]);
+
+  const estimatedVolume = curVocab?.wordIds.length ?? INITIAL_AMOUNT;
+  const lessonVolume = Math.min(estimatedVolume, preferenceStore.lessonVolume);
+
+  useEffect(() => {
+    if (curVocab && curVocab.wordIds.length > 0 && lessonVolume > 0) {
+      setLessonWords(randomizeWords(curVocabWords, lessonVolume));
       setIsLoading(false);
     }
-  }, [lessonVolume, router, curVocabWords]);
-
-  // lesson end
-  useEffect(() => {
-    if (curWord !== initialWordIdx && curWord > lessonVolume) {
-      updateProgress(allAnswers);
-    }
-  }, [router, curWord, lessonVolume]);
-
-  useEffect(() => {
-    // only fetch data if vocab is different from the last one
-    if (vocabs.some(v => v._id === router.query.id)) {
-      setIsLoading(true);
-    }
-  }, []);
+  }, [router, curVocabWords, curVocab, lessonVolume]);
 
   useEffect(() => {
     if (inputRef.current && !isLoading) {

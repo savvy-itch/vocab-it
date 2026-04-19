@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useRouter } from 'next/router';
 
-export default function EndLessonDialog() {
+const EndLessonDialog = memo(function EndLessonDialog() {
   const router = useRouter();
 
   return (
@@ -41,4 +41,6 @@ export default function EndLessonDialog() {
       </AlertDialogContent>
     </AlertDialog>
   )
-}
+});
+
+export default EndLessonDialog;
