@@ -93,6 +93,7 @@ const Lesson: NextPageWithLayout = () => {
   // get all vocab words by default
   useEffect(() => {
     if (router.isReady) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsLoading(true);
       if (router.query.id) {
         const existingVocab = vocabs.find(v => v._id === router.query.id);
@@ -117,10 +118,11 @@ const Lesson: NextPageWithLayout = () => {
 
   useEffect(() => {
     if (curVocab && curVocab.wordIds.length > 0 && lessonVolume > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLessonWords(randomizeWords(curVocabWords, lessonVolume));
       setIsLoading(false);
     }
-  }, [router, curVocabWords, curVocab, lessonVolume]);
+  }, [curVocabWords, curVocab, lessonVolume]);
 
   useEffect(() => {
     if (inputRef.current && !isLoading) {

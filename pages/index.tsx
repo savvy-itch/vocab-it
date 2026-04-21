@@ -32,6 +32,7 @@ const Home: NextPageWithLayout = () => {
 
   useEffect(() => {
     if (resolvedTheme === 'dark') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setImgSrc('/images/vocab-hero-dark.svg');
     } else {
       setImgSrc('/images/vocab-hero.svg');

@@ -179,6 +179,7 @@ const PairsLesson: NextPageWithLayout = () => {
     }
 
     const randomized = randomizeWords(allVocabWords, lessonVolume);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLessonWords(randomized);
   }, [allVocabWords, lessonWords.length, curVocab, lessonVolume]);
 
@@ -196,6 +197,7 @@ const PairsLesson: NextPageWithLayout = () => {
       arr.push(i);
     }
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setCurCardWordIdxs(arr);
     setCurCardTranslationIdxs(shuffleIndices(arr));
     setIsLoading(false);

@@ -11,6 +11,7 @@ export default function VocabList() {
 
   useEffect(() => {
     if (vocabs) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsLoading(false);
     }
   }, [vocabs]);

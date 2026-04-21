@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { VocabLocal, WordLocal } from '@/lib/types';
 import useProfileStore from '@/lib/profileStore';
@@ -16,7 +16,6 @@ import VocabTitleSection from '@/components/VocabTitleSection';
 import { Skeleton } from '@/components/ui/skeleton';
 import DeleteVocabBtn from '@/components/DeleteVocabBtn';
 import DeleteWordsBtn from '@/components/DeleteWordsBtn';
-import WordListSkeleton from '@/components/skeletons/WordListSkeleton';
 import SelectLang from '@/components/SelectLang';
 import { useVocabStore } from '@/lib/vocabStore';
 import { useWordStore } from '@/lib/wordStore';
@@ -26,16 +25,23 @@ import { MdOutlineTranslate } from "react-icons/md";
 const Vocabulary: NextPageWithLayout = () => {
   const router = useRouter();
   const { vocabs } = useVocabStore(state => state);
-  const [currVocab, setCurrVocab] = useState<VocabLocal>();
   const { words } = useWordStore(state => state);
-  const [currWords, setCurrWords] = useState<WordLocal[]>([]);
   const {
     isAddWord,
     isEditWord,
     isEditVocabTitle,
     resetEditModes
   } = useProfileStore(state => state);
-  const [isLoading, setIsLoading] = useState(false);
+
+  // get words for current vocabulary
+  const currVocab = vocabs.find(v => v._id === router.query.id);
+  let currWords: WordLocal[] = [];
+  if (currVocab) {
+    currVocab.wordIds.forEach(id => {
+      currWords.push(words[id]);
+    });
+    currWords = currWords.filter(Boolean).sort((a, b) => a.word.localeCompare(b.word));
+  }
 
   function checkSingleEdit() {
     if (isAddWord || isEditWord || isEditVocabTitle) {
@@ -48,24 +54,9 @@ const Vocabulary: NextPageWithLayout = () => {
     if (currWords.length === 0) {
       return 0;
     }
-    const totalRate: number = currWords.reduce((acc, val) => acc + val.progress, 0 );
+    const totalRate: number = currWords.reduce((acc, val) => acc + val.progress, 0);
     return Math.round(totalRate / currWords.length);
   }
-
-  useEffect(() => {
-    setIsLoading(true);
-    const existingVocab = vocabs.find(v => v._id === router.query.id);
-    if (existingVocab) {
-      setCurrVocab(existingVocab);
-      let existingWords: WordLocal[] = [];
-      existingVocab.wordIds.forEach(id => {
-        existingWords.push(words[id]);
-      });
-      existingWords = existingWords.filter(Boolean).sort((a, b) => a.word.localeCompare(b.word));
-      setCurrWords(existingWords);
-    }
-    setIsLoading(false);
-  }, [router, words, vocabs]);
 
   useEffect(() => {
     resetEditModes();
@@ -84,7 +75,7 @@ const Vocabulary: NextPageWithLayout = () => {
           >
             <HiArrowLongLeft /> Profile
           </Link>
-          {!isLoading && currVocab ? (
+          {currVocab ? (
             <VocabTitleSection
               id={currVocab._id}
               vocabTitle={currVocab.title}
@@ -108,12 +99,12 @@ const Vocabulary: NextPageWithLayout = () => {
               <Link
                 className="text-white rounded-lg py-2 px-3 flex gap-1 items-center font-semibold bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg hover:scale-105 transition-all"
                 href={`/lesson/${router.query.id}`}>
-                  <MdOutlineTranslate /> <span>Flash Cards</span>
+                <MdOutlineTranslate /> <span>Flash Cards</span>
               </Link>
               <Link
                 className="text-white rounded-lg py-2 px-3 flex gap-1 items-center font-semibold bg-btn-bg hover:bg-hover-btn-bg focus:bg-hover-btn-bg hover:scale-105 transition-all"
                 href={`/lesson/pairs/${router.query.id}`}>
-                  <FaShuffle /> <span>Find a Pair</span>
+                <FaShuffle /> <span>Find a Pair</span>
               </Link>
             </div>
           ) : (
@@ -145,29 +136,25 @@ const Vocabulary: NextPageWithLayout = () => {
             <p className="text-sm sm:text-base font-bold">Translation</p>
             <p className="text-sm sm:text-base font-bold">Progress</p>
           </div>
-          {isLoading
-            ? <WordListSkeleton />
-            : (
-              currWords.length > 0 ? (
-                <ScrollArea className="h-62.5 rounded-md border px-2 sm:px-4 py-3">
-                  {currWords.map((w, i) => {
-                    return (
-                      <SingleWord
-                        key={w._id}
-                        word={w}
-                        vocab={currVocab as VocabLocal}
-                        checkSingleEdit={checkSingleEdit}
-                        isLastWord={i === currWords.length - 1}
-                      />
-                    )
-                  })}
-                </ScrollArea>
-              ) : (
-                <div className="h-62.5 flex justify-center items-center rounded-md border">
-                  <p className="text-xl font-bold">No words</p>
-                </div>
-              )
-            )
+          {currWords.length > 0 ? (
+            <ScrollArea className="h-62.5 rounded-md border px-2 sm:px-4 py-3">
+              {currWords.map((w, i) => {
+                return (
+                  <SingleWord
+                    key={w._id}
+                    word={w}
+                    vocab={currVocab as VocabLocal}
+                    checkSingleEdit={checkSingleEdit}
+                    isLastWord={i === currWords.length - 1}
+                  />
+                )
+              })}
+            </ScrollArea>
+          ) : (
+            <div className="h-62.5 flex justify-center items-center rounded-md border">
+              <p className="text-xl font-bold">No words</p>
+            </div>
+          )
           }
         </section>
         {currVocab && <VocabAddWordForm vocabWords={currVocab.wordIds} vocabId={currVocab._id} checkSingleEdit={checkSingleEdit} />}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { CheckSingleEditFunction } from '@/lib/types';
 import useProfileStore from '@/lib/profileStore';
 import { usePreferencesStore } from '@/lib/preferencesStore';
@@ -11,14 +11,15 @@ const MAX_WORDS = 200;
 const MAX_ROUNDS = 20;
 
 export default function ProfileSettingsSection({ checkSingleEdit }: { checkSingleEdit: CheckSingleEditFunction }) {
-  const [wordsPerLesson, setWordsPerLesson] = useState<number>(0);
-  const [roundsPerLesson, setRoundsPerLesson] = useState<number>(0);
   const {
     rounds,
     lessonVolume,
     updateLessonVolume,
     updateRounds,
     soundOn } = usePreferencesStore(state => state);
+
+  const [wordsPerLesson, setWordsPerLesson] = useState<number>(lessonVolume);
+  const [roundsPerLesson, setRoundsPerLesson] = useState<number>(rounds);
   const {
     isEditWordAmount,
     isEditRoundsAmount,
@@ -90,25 +91,26 @@ export default function ProfileSettingsSection({ checkSingleEdit }: { checkSingl
 
   function checkForAbort(e: React.KeyboardEvent) {
     if (e.key === "Escape") {
-      setWordsPerLesson(lessonVolume);
-      setRoundsPerLesson(rounds);
-      isEditWordAmount && toggleIsEditWordAmount(); // to false
-      isEditRoundsAmount && toggleIsEditRoundsAmount(); // to false
+      if (isEditWordAmount) {
+        toggleIsEditWordAmount(); // to false
+        setWordsPerLesson(lessonVolume);
+      } else if (isEditRoundsAmount) {
+        toggleIsEditRoundsAmount(); // to false
+        setRoundsPerLesson(rounds);
+      }
       setErrorMsg('');
     }
   }
 
-  useEffect(() => {
-    if (lessonVolume && wordsPerLesson === 0) {
-      setWordsPerLesson(lessonVolume);
-    }
-  }, [lessonVolume, wordsPerLesson]);
+  function cancelWordsUpdate() {
+    toggleIsEditWordAmount();
+    setWordsPerLesson(lessonVolume);
+  }
 
-  useEffect(() => {
-    if (rounds && roundsPerLesson === 0) {
-      setRoundsPerLesson(rounds);
-    }
-  }, [rounds, roundsPerLesson]);
+  function cancelRoundsUpdate() {
+    toggleIsEditRoundsAmount();
+    setRoundsPerLesson(rounds);
+  }
 
   return (
     <article>
@@ -137,7 +139,7 @@ export default function ProfileSettingsSection({ checkSingleEdit }: { checkSingl
             </button>
             <button
               className="rounded-full mobile:bg-secondary-bg-light mobile:hover:bg-secondary-bg-light/80 text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm"
-              onClick={toggleIsEditWordAmount}
+              onClick={cancelWordsUpdate}
             >
               Cancel
             </button>
@@ -187,7 +189,7 @@ export default function ProfileSettingsSection({ checkSingleEdit }: { checkSingl
             </button>
             <button
               className="rounded-full mobile:bg-secondary-bg-light mobile:hover:bg-secondary-bg-light/80 text-white cursor-pointer mobile:px-3 mobile:py-1 mobile:rounded-sm"
-              onClick={toggleIsEditRoundsAmount}
+              onClick={cancelRoundsUpdate}
             >
               Cancel
             </button>
