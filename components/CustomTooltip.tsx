@@ -9,12 +9,19 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useEffect, useState } from "react";
 import { HiMiniQuestionMarkCircle } from "react-icons/hi2";
 
-const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
 export default function CustomTooltip({ text }: { text: string }) {
-  if (hasTouchScreen) {
+  const [isTouchScreen, setIsTouchScreen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsTouchScreen(hasTouchScreen);
+  }, []);
+
+  if (isTouchScreen) {
     return (
       <Popover>
         <PopoverTrigger aria-label="tooltip for touch screens">
