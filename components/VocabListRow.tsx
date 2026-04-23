@@ -182,7 +182,7 @@ export default function VocabListRow({ vocab }: { vocab: VocabLocal }) {
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
-                <p className="text-sm sm:text-lg rounded-sm bg-btn-bg hover:bg-hover-btn-bg transition-colors py-1 px-3 text-gray-300">Start <span className="hidden sm:inline">Lesson</span></p>
+                <p className="py-1 px-2 rounded-sm border border-gray-400 text-gray-300">Lessons</p>
               )}
               <div className="flex gap-4">
                 <button className="text-lg hover:cursor-pointer" aria-label="edit" onClick={enterEditTitleMode}><HiPencilSquare /></button>
